@@ -205,6 +205,21 @@ a.vid:hover .play{transform:scale(1.1)}
 .vid .cap h3{font-family:var(--f-hand);font-size:1.45rem;color:var(--maroon);line-height:1.15}
 .vid .cap p{font-size:.86rem;color:var(--soft);line-height:1.45}
 .vid.is-soon{opacity:.86}
+.feature{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:34px;align-items:center;margin-bottom:10px}
+@media (max-width:820px){.feature{grid-template-columns:1fr;gap:20px}}
+.feature .polaroid{transform:rotate(-1.2deg);padding:14px 14px 18px}
+.feature .screen{position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden;background:var(--maroon);display:grid;place-items:center}
+.feature .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.feature .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.feature .screen .play{position:relative;width:84px;height:84px;border-radius:50%;background:var(--cream);display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.4);transition:transform .2s}
+.feature a.screen:hover .play{transform:scale(1.08)}
+.feature .screen .play svg{margin-left:6px}
+.feature .now{display:inline-block;font-family:var(--f-hand);font-size:1.3rem;color:var(--maroon);background:var(--blush);padding:2px 14px;transform:rotate(-3deg)}
+.feature h3{font-family:var(--f-cond);text-transform:uppercase;font-size:clamp(2.4rem,5vw,3.4rem);line-height:.95;color:#fff;margin-top:14px}
+.feature h3 .script{display:block;text-transform:none;color:var(--blush);font-size:.8em;transform:rotate(-4deg);margin-top:-.05em}
+.feature p{color:#F6E2E2;margin-top:12px;max-width:44ch}
+.feature .open{margin-top:18px}
+.soon-label{grid-column:1/-1;font-family:var(--f-hand);font-size:1.5rem;color:var(--blush);transform:rotate(-2deg);margin-top:18px}
 .empty{font-family:var(--f-hand);font-size:1.3rem;color:var(--soft)}
 
 .cheat{margin-top:70px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
@@ -292,9 +307,9 @@ a.vid:hover .play{transform:scale(1.1)}
 @keyframes fill{to{width:100%}}
 
 /* page transition curtain */
-#curtain{position:fixed;inset:0;z-index:90;display:grid;place-items:center;transform:translateY(100%);pointer-events:none;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#curtain{position:fixed;inset:0;z-index:90;display:grid;place-items:center;transform:translateY(calc(100% + 40px));pointer-events:none;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 #curtain.in{transition:transform .42s cubic-bezier(.7,0,.3,1);transform:translateY(0)}
-#curtain.out{transition:transform .5s cubic-bezier(.7,0,.3,1);transform:translateY(-100%)}
+#curtain.out{transition:transform .5s cubic-bezier(.7,0,.3,1);transform:translateY(calc(-100% - 40px))}
 #curtain .lbl{font-family:var(--f-script);font-size:clamp(3rem,10vw,6rem);color:#fff;transform:rotate(-5deg)}
 #curtain .tear{position:absolute;left:0;right:0;height:22px;background:var(--cherry)}
 #curtain .tear.t{top:-20px;-webkit-mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%;mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) 50%/18px 100%}
@@ -384,8 +399,8 @@ footer .typed{font-size:.7rem}
       <span><b>BCA MODEL UN</b><small>Bergen County Academies · est. 1997</small></span>
     </a>
     <nav class="links" aria-label="Sections">
-      <a href="#scrimmages" class="keep">Scrimmages</a>
       <a href="#training" class="keep">Training</a>
+      <a href="#scrimmages" class="keep">Scrimmages</a>
       <a href="#travel">Travel Team</a>
       <a href="#amun">AMUN</a>
       <a href="#photos">Photos</a>
@@ -402,8 +417,8 @@ footer .typed{font-size:.7rem}
         <h1 class="cond">Research. Debate. Negotiate.<span class="script">the BCA MUN comMUNity</span></h1>
         <p class="lede">BCA's oldest and largest internationally minded club, home to AMUN, JAMUN and the BCA Travel Team. We train new delegates through scrimmages and our video library, compete at college conferences, and host our own high school conference every February.</p>
         <div class="ctas">
-          <a class="btn solid" href="#scrimmages">See our scrimmages</a>
-          <a class="btn line" href="#training">Watch training videos</a>
+          <a class="btn solid" href="#training">Watch training videos</a>
+          <a class="btn line" href="#scrimmages">See our scrimmages</a>
         </div>
       </div>
       <div class="invite" aria-label="Invitation to new delegates">
@@ -428,6 +443,26 @@ footer .typed{font-size:.7rem}
       </div>
     </div>
   </div>
+
+  <!-- TRAINING -->
+  <section id="training" class="sec grid-red on-red">
+    <div class="wrap">
+      <div class="sec-head pop">
+        <span class="typed">Training library</span>
+        <h2 class="cond">New delegate? <span class="script">start here</span></h2>
+        <p>Training videos from our team, from your first speech to writing operative clauses. Start with the unmod video below. More are on the way.</p>
+      </div>
+      <div class="tabs" role="group" aria-label="Filter videos" id="filters"></div>
+      <div class="videos" id="videos"></div>
+
+      <div class="cheat pop" aria-label="Procedure cheat sheet">
+        <div class="sticky"><code>POINT OF ORDER</code><h3>procedure got broken</h3><p>Raise it when the chair or a delegate skips the rules.</p></div>
+        <div class="sticky"><code>POINT OF INQUIRY</code><h3>ask the chair</h3><p>Use it when you're not sure what's happening or what's in order.</p></div>
+        <div class="sticky"><code>PERAMBULATORY</code><h3>"Recalling," "Noting"</h3><p>Opening clauses that set the context of a resolution.</p></div>
+        <div class="sticky"><code>OPERATIVE</code><h3>"Urges," "Calls upon"</h3><p>Numbered action clauses. This is what the committee votes on.</p></div>
+      </div>
+    </div>
+  </section>
 
   <!-- SCRIMMAGES -->
   <section id="scrimmages" class="sec">
@@ -492,26 +527,6 @@ footer .typed{font-size:.7rem}
             </ol>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRAINING -->
-  <section id="training" class="sec grid-red on-red">
-    <div class="wrap">
-      <div class="sec-head pop">
-        <span class="typed">Training library</span>
-        <h2 class="cond">New delegate? <span class="script">start here</span></h2>
-        <p>Short training videos from our team, from your first speech to writing operative clauses. Tap any video to watch it in Google Drive.</p>
-      </div>
-      <div class="tabs" role="group" aria-label="Filter videos" id="filters"></div>
-      <div class="videos" id="videos"></div>
-
-      <div class="cheat pop" aria-label="Procedure cheat sheet">
-        <div class="sticky"><code>POINT OF ORDER</code><h3>procedure got broken</h3><p>Raise it when the chair or a delegate skips the rules.</p></div>
-        <div class="sticky"><code>POINT OF INQUIRY</code><h3>ask the chair</h3><p>Use it when you're not sure what's happening or what's in order.</p></div>
-        <div class="sticky"><code>PERAMBULATORY</code><h3>"Recalling," "Noting"</h3><p>Opening clauses that set the context of a resolution.</p></div>
-        <div class="sticky"><code>OPERATIVE</code><h3>"Urges," "Calls upon"</h3><p>Numbered action clauses. This is what the committee votes on.</p></div>
       </div>
     </div>
   </section>
@@ -707,7 +722,17 @@ function renderFilters(){
 function renderVideos(){
   const list = VIDEOS.filter(v=>active==="All"||v.category===active);
   if(!list.length){vBox.innerHTML=`<p class="empty">no ${esc(active.toLowerCase())} videos yet, check back soon!</p>`;return;}
-  vBox.innerHTML = list.map(v=>{
+  const ready=list.filter(v=>v.url.trim()), soon=list.filter(v=>!v.url.trim());
+  const feat=ready.map(v=>{
+    const id=idOf(v.url);
+    const screen = EMBED && id
+      ? `<div class="screen"><iframe src="https://drive.google.com/file/d/${id}/preview" title="${esc(v.title)}" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe></div>`
+      : `<a class="screen" href="${esc(toWatchUrl(v.url))}" target="_blank" rel="noopener" aria-label="Watch ${esc(v.title)} in Google Drive">${id?`<img alt="" src="https://drive.google.com/thumbnail?id=${id}&sz=w1280" onerror="this.remove()">`:""}<span class="play"><svg width="30" height="34" viewBox="0 0 20 22" aria-hidden="true"><path d="M2 1.5v19l16-9.5z" fill="#631A2D"/></svg></span></a>`;
+    return `<div class="feature"><div class="polaroid"><span class="clip" aria-hidden="true"></span>${screen}</div>
+      <div><span class="now">now playing</span><h3>${esc(v.title)}<span class="script">${esc(v.category.toLowerCase())}</span></h3><p>${esc(v.blurb)}</p>
+      <a class="btn line open" href="${esc(toWatchUrl(v.url))}" target="_blank" rel="noopener">Open in Google Drive</a></div></div>`;
+  }).join("");
+  vBox.innerHTML = feat + (soon.length?`<p class="soon-label">coming soon…</p>`:"") + soon.map(v=>{
     const ready=!!v.url.trim();
     const bg=BG[v.category]||"var(--maroon)";
     const inner=`<div class="polaroid"><span class="clip" aria-hidden="true"></span>
@@ -720,11 +745,11 @@ function renderVideos(){
       : `<div class="vid is-soon">${inner}</div>`;
   }).join("");
 }
+function idOf(u){const m=u.match(/\/file\/d\/([\w-]+)/)||u.match(/[?&]id=([\w-]+)/);return m?m[1]:null}
 renderFilters(); renderVideos();
 
 const modal=document.getElementById("player"), frame=document.getElementById("player-frame"),
       pTitle=document.getElementById("player-title"), pLink=document.getElementById("player-link");
-function idOf(u){const m=u.match(/\/file\/d\/([\w-]+)/)||u.match(/[?&]id=([\w-]+)/);return m?m[1]:null}
 function openPlayer(v){
   const id=idOf(v.url); if(!id) return false;
   frame.src=`https://drive.google.com/file/d/${id}/preview`;
