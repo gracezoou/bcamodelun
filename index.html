@@ -305,6 +305,19 @@ a.vid:hover .play{transform:scale(1.1)}
 .js .pop.seen{transform:translateY(0) rotate(var(--r,0deg))}
 @media (prefers-reduced-motion:reduce){#loader{display:none}#curtain{display:none}}
 
+/* video player pop-up */
+#player{position:fixed;inset:0;z-index:95;background:rgba(42,14,21,.78);display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
+#player[hidden]{display:none!important}
+.player-card{position:relative;width:min(960px,100%);background:#FBFAF7;padding:16px 16px 18px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);transform:rotate(-.6deg);animation:drop .45s cubic-bezier(.2,.8,.2,1) both}
+.player-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.player-top .typed{color:var(--red);font-weight:700}
+#player-close{font:inherit;font-family:var(--f-hand);font-size:1.2rem;background:none;border:0;color:var(--maroon);cursor:pointer;padding:4px 8px}
+.player-screen{position:relative;aspect-ratio:16/9;max-width:100%;background:var(--ink)}
+.player-screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.player-foot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:12px}
+.player-foot h3{font-family:var(--f-hand);font-size:1.6rem;color:var(--maroon)}
+.player-foot a{font-family:var(--f-type);font-size:.8rem;color:var(--red);font-weight:700}
+
 footer{background:var(--maroon);color:var(--blush)}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:26px 34px}
 footer img{width:40px;height:40px}
@@ -327,6 +340,14 @@ footer .typed{font-size:.7rem}
 </div>
 <noscript><style>#loader{display:none}</style></noscript>
 <div id="curtain" class="grid-red" aria-hidden="true"><span class="tear t"></span><span class="lbl" id="curtain-lbl"></span><span class="tear b"></span></div>
+<div id="player" hidden role="dialog" aria-modal="true" aria-labelledby="player-title">
+  <div class="player-card">
+    <span class="tape" aria-hidden="true"></span>
+    <div class="player-top"><span class="typed">BCA MUN training</span><button id="player-close" type="button" aria-label="Close video">close ✕</button></div>
+    <div class="player-screen"><iframe id="player-frame" title="Training video" allow="autoplay; fullscreen" allowfullscreen src="about:blank"></iframe></div>
+    <div class="player-foot"><h3 id="player-title"></h3><a id="player-link" href="#" target="_blank" rel="noopener">open in drive ↗</a></div>
+  </div>
+</div>
 <div class="cursor-ring" aria-hidden="true"><span>watch</span></div>
 <div class="cursor-dot" aria-hidden="true"></div>
 
@@ -616,12 +637,16 @@ const VIDEOS = [
   { title:"researching your country",       category:"Basics",     duration:"", url:"", blurb:"Find your country's real stance fast, and where to look." },
   { title:"western business attire",        category:"Basics",     duration:"", url:"", blurb:"What to wear to AMUN and college conferences." },
   { title:"parli pro 101",                  category:"Parli Pro",  duration:"", url:"", blurb:"Motions, points, and voting, in the order they happen." },
-  { title:"mod vs. unmod caucus",           category:"Parli Pro",  duration:"", url:"", blurb:"When to motion for each, and how to stand out in both." },
+  { title:"the unmoderated caucus",         category:"Parli Pro",  duration:"", url:"https://drive.google.com/file/d/1BrLjEOpRynogCm0ZIiPgi1CBhn3j7hYG/view?usp=sharing", blurb:"How to work the room during unmod: find your bloc, pitch your ideas, and start writing." },
   { title:"your first opening speech",      category:"Speaking",   duration:"", url:"", blurb:"A 60-second template you can use at your first scrimmage." },
   { title:"writing a position paper",       category:"Writing",    duration:"", url:"", blurb:"Structure, sources, and what chairs look for." },
   { title:"drafting resolutions",           category:"Writing",    duration:"", url:"", blurb:"Perambulatory and operative clauses, sponsors and signatories." },
   { title:"crisis 101",                     category:"Crisis",     duration:"", url:"", blurb:"Directives, crisis notes, and thinking on your feet." }
 ];
+VIDEOS.sort((a,b)=>(!!b.url.trim())-(!!a.url.trim()));
+/* On the real site (GitHub Pages / your domain) videos play in a pop-up player.
+   In the Claude preview, outside players are blocked, so they open in Drive instead. */
+const EMBED = !/claude|anthropic|usercontent/i.test(location.hostname);
 const FILTERS = ["All","Basics","Parli Pro","Speaking","Writing","Crisis"];
 const BG = {"Basics":"var(--maroon)","Parli Pro":"var(--red)","Speaking":"#A8323C","Writing":"#7A1F30","Crisis":"#4A1220"};
 
@@ -651,11 +676,32 @@ function renderVideos(){
         ${v.duration?`<span class="dur">${esc(v.duration)}</span>`:""}</div>
       <div class="cap"><span class="typed">${esc(v.category)}</span><h3>${esc(v.title)}</h3><p>${esc(v.blurb)}</p></div></div>`;
     return ready
-      ? `<a class="vid" href="${esc(toWatchUrl(v.url))}" target="_blank" rel="noopener" aria-label="Watch ${esc(v.title)} in Google Drive">${inner}</a>`
+      ? `<a class="vid" data-title="${esc(v.title)}" href="${esc(toWatchUrl(v.url))}" target="_blank" rel="noopener" aria-label="Watch ${esc(v.title)} in Google Drive">${inner}</a>`
       : `<div class="vid is-soon">${inner}</div>`;
   }).join("");
 }
 renderFilters(); renderVideos();
+
+const modal=document.getElementById("player"), frame=document.getElementById("player-frame"),
+      pTitle=document.getElementById("player-title"), pLink=document.getElementById("player-link");
+function idOf(u){const m=u.match(/\/file\/d\/([\w-]+)/)||u.match(/[?&]id=([\w-]+)/);return m?m[1]:null}
+function openPlayer(v){
+  const id=idOf(v.url); if(!id) return false;
+  frame.src=`https://drive.google.com/file/d/${id}/preview`;
+  pTitle.textContent=v.title; pLink.href=toWatchUrl(v.url);
+  modal.hidden=false; document.body.style.overflow="hidden"; window.__lenis&&window.__lenis.stop();
+  document.getElementById("player-close").focus(); return true;
+}
+function closePlayer(){modal.hidden=true;frame.src="about:blank";document.body.style.overflow="";window.__lenis&&window.__lenis.start();}
+vBox.addEventListener("click",e=>{
+  if(!EMBED) return;
+  const a=e.target.closest("a.vid"); if(!a) return;
+  const v=VIDEOS.find(x=>x.title===a.dataset.title);
+  if(v && openPlayer(v)) e.preventDefault();
+});
+document.getElementById("player-close").addEventListener("click",closePlayer);
+modal.addEventListener("click",e=>{if(e.target===modal)closePlayer()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
@@ -674,7 +720,7 @@ renderFilters(); renderVideos();
   let lenis=null;
   if(!reduce && window.Lenis){
     try{
-      lenis=new Lenis({lerp:0.09,smoothWheel:true});
+      lenis=new Lenis({lerp:0.09,smoothWheel:true});window.__lenis=lenis;
       const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
     }catch(e){lenis=null}
   }
