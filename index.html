@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Bergen County Academies Model UN: scrimmages, delegate training videos, the travel team, and AMUN, our annual high school conference.">
 <meta property="og:title" content="BCA Model UN">
-<meta property="og:image" content="assets/logo.png">
+<meta property="og:image" content="https://bcamodelun.com/assets/logo.png">
 <link rel="icon" href="assets/logo.png">
 <style>html,body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>BCA Model UN</title>
@@ -318,6 +318,19 @@ a.vid:hover .play{transform:scale(1.1)}
 .player-foot h3{font-family:var(--f-hand);font-size:1.6rem;color:var(--maroon)}
 .player-foot a{font-family:var(--f-type);font-size:.8rem;color:var(--red);font-weight:700}
 
+/* photo wall */
+.wall{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:56px 34px;padding-top:18px}
+@media (max-width:900px){.wall{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.wall{grid-template-columns:1fr}}
+.wall figure{margin:0}
+.wall figure:nth-child(3n+1){transform:rotate(-2deg)}
+.wall figure:nth-child(3n+2){transform:rotate(1.6deg) translateY(18px)}
+.wall figure:nth-child(3n){transform:rotate(-.8deg)}
+.wall .ph{aspect-ratio:4/3;max-width:100%;overflow:hidden;background:var(--cherry);display:grid;place-items:center}
+.wall .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.wall .ph .none{font-family:var(--f-hand);color:#fff;font-size:1.3rem;opacity:.85}
+.wall figcaption{font-family:var(--f-hand);font-size:1.3rem;color:var(--maroon);padding:10px 4px 0;text-align:center}
+
 footer{background:var(--maroon);color:var(--blush)}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:26px 34px}
 footer img{width:40px;height:40px}
@@ -362,6 +375,7 @@ footer .typed{font-size:.7rem}
       <a href="#training" class="keep">Training</a>
       <a href="#travel">Travel Team</a>
       <a href="#amun">AMUN</a>
+      <a href="#photos">Photos</a>
       <a href="#join">Join</a>
     </nav>
   </div>
@@ -562,6 +576,19 @@ footer .typed{font-size:.7rem}
     </div>
   </section>
 
+  <!-- PHOTOS -->
+  <section id="photos" class="sec">
+    <div class="wrap">
+      <div class="sec-head pop">
+        <span class="typed">The scrapbook</span>
+        <h2 class="cond">AMUN XXVII <span class="script">in photos</span></h2>
+        <p>450+ delegates, 28 schools and two very full days at BCA last February.</p>
+      </div>
+      <div class="wall" id="wall"></div>
+      <div class="ctas" style="margin-top:56px"><a class="btn maroon" href="https://www.instagram.com/bcamodelun/" target="_blank" rel="noopener">More on @bcamodelun</a></div>
+    </div>
+  </section>
+
   <!-- HISTORY -->
   <section class="sec" style="background:var(--maroon);color:#fff;padding-block:72px">
     <div class="wrap">
@@ -702,6 +729,27 @@ vBox.addEventListener("click",e=>{
 document.getElementById("player-close").addEventListener("click",closePlayer);
 modal.addEventListener("click",e=>{if(e.target===modal)closePlayer()});
 addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()});
+
+/* ===== PHOTO WALL =====
+   Each photo is a Google Drive file ID (the part after /file/d/ in its link).
+   Files must be shared "Anyone with the link can view". Swap IDs to change photos. */
+const PHOTOS = [
+  { id:"1ZSq2gdXrxUAO5mWrbVSlpVRTf3JGb7kd", caption:"amun xxvii" },
+  { id:"1hvcDJdl3wrc0zGMUb2seyiiEpdiHBn5p", caption:"committee in session" },
+  { id:"1h2bx_FKkpPrkqq0_p-Lcf_kNwuwym4q2", caption:"feb 5–6, 2026" },
+  { id:"1R_Xz0iuR5z5atXAN9aPiM6A2kY0VLT9k", caption:"the amun crew" },
+  { id:"1UGzvGOgFIrljdV_3Yfs330RpicdHXtEV", caption:"gavels up!" },
+  { id:"1hyGlCRbD_g_X32Vo0xxt1T_AatTgG8kn", caption:"see you at xxviii" }
+];
+const wall=document.getElementById("wall");
+wall.innerHTML = PHOTOS.map((p,i)=>`<figure class="polaroid"><span class="clip" aria-hidden="true"></span><div class="ph"><img loading="lazy" alt="BCA Model UN at AMUN XXVII" data-i="${i}" src="https://lh3.googleusercontent.com/d/${esc(p.id)}=w1000"></div><figcaption>${esc(p.caption)}</figcaption></figure>`).join("");
+wall.querySelectorAll("img").forEach(img=>{
+  img.addEventListener("error",()=>{
+    const p=PHOTOS[img.dataset.i];
+    if(!img.dataset.tried){img.dataset.tried="1";img.src=`https://drive.google.com/thumbnail?id=${p.id}&sz=w1000`;}
+    else{img.replaceWith(Object.assign(document.createElement("span"),{className:"none",textContent:"photo coming soon"}));}
+  });
+});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
@@ -732,7 +780,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()}
 
   /* page transitions on in-page links */
   const curtain=document.getElementById("curtain"), lbl=document.getElementById("curtain-lbl");
-  const names={top:"welcome!",scrimmages:"scrimmages",training:"training",travel:"travel team",amun:"AMUN",team:"the team",join:"join us"};
+  const names={top:"welcome!",scrimmages:"scrimmages",training:"training",travel:"travel team",amun:"AMUN",photos:"the scrapbook",team:"the team",join:"join us"};
   let busy=false;
   document.addEventListener("click",e=>{
     const a=e.target.closest('a[href^="#"]'); if(!a) return;
