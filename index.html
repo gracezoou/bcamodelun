@@ -113,15 +113,41 @@ nav.links a:hover{background:var(--maroon);color:var(--cream)}
 .to-from div{display:grid;grid-template-columns:64px minmax(0,1fr);border-bottom:1px solid var(--maroon);padding-bottom:2px}
 .to-from em{font-style:normal;font-family:Georgia,serif;font-size:1rem}
 
-/* stats strip */
-.stats{position:relative;margin-top:-34px;z-index:2}
-.torn{background:var(--paper);box-shadow:0 14px 26px -16px rgba(42,14,21,.45);-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/16px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/16px 100%}
-.stats .torn{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:22px 28px 34px;transform:rotate(-.6deg)}
-.stat{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.stat b{font-family:var(--f-body);font-weight:800;font-size:clamp(1.9rem,4vw,2.6rem);color:var(--maroon);line-height:1;font-variant-numeric:tabular-nums}
-.stat span{font-family:var(--f-hand);font-size:1.15rem;color:var(--soft);line-height:1.15}
-.stats .note{grid-column:1/-1;font-family:var(--f-type);font-size:.72rem;letter-spacing:.06em;color:var(--soft);text-transform:uppercase}
-@media (max-width:760px){.stats .torn{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* stats board */
+.stats{position:relative;background:var(--cream);padding-block:0 70px}
+.washi{position:relative;z-index:3;margin:-22px -2% 0;transform:rotate(-1.6deg);background:rgba(243,214,212,.94);background-image:repeating-linear-gradient(90deg,transparent 0 22px,rgba(195,49,59,.08) 22px 24px);box-shadow:0 4px 10px -4px rgba(42,14,21,.35);overflow:hidden;white-space:nowrap;-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%}
+.washi-track{display:inline-flex;animation:marquee 38s linear infinite}
+.washi-track span{font-family:var(--f-hand);font-size:1.25rem;color:var(--maroon);padding:10px 0 12px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.stats-cap{font-size:1.35rem;color:var(--soft);margin:44px 0 26px;transform:rotate(-2deg);display:inline-block}
+.stat-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px 26px;align-items:center}
+@media (max-width:900px){.stat-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.stat-board{grid-template-columns:1fr}}
+.st{position:relative;display:grid;gap:6px;justify-items:center;text-align:center;padding:24px 16px 20px;transition:transform .25s ease}
+.st:hover{transform:rotate(0) scale(1.04)!important}
+.st b{font-family:var(--f-body);font-weight:900;font-size:clamp(2.6rem,5vw,3.4rem);line-height:1;color:var(--maroon);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.st .lbl{font-family:var(--f-hand);font-size:1.18rem;line-height:1.2;color:var(--soft)}
+.ticket{background:var(--paper);transform:rotate(-3deg);box-shadow:0 12px 20px -12px rgba(42,14,21,.5);border-left:2px dashed var(--line);-webkit-mask:radial-gradient(circle 10px at 0 50%,#0000 98%,#000) left,radial-gradient(circle 10px at 100% 50%,#0000 98%,#000) right;-webkit-mask-size:51% 100%;-webkit-mask-repeat:no-repeat;mask:radial-gradient(circle 10px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 10px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.ticket .typed{font-size:.62rem;color:var(--red);font-weight:700;border-bottom:1px dashed var(--line);padding-bottom:6px;width:100%}
+.ticket b{color:var(--red)}
+.sticky-st{background:var(--blush);transform:rotate(2.4deg);box-shadow:0 12px 18px -12px rgba(42,14,21,.45)}
+.sticky-st::before{content:"";position:absolute;top:-8px;left:50%;width:16px;height:16px;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle at 35% 35%,#F06A6F,#B3202B 70%);box-shadow:0 3px 4px rgba(0,0,0,.3)}
+.card-st{background:var(--paper);transform:rotate(-1.4deg);box-shadow:0 12px 20px -12px rgba(42,14,21,.45);background-image:linear-gradient(rgba(195,49,59,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(195,49,59,.08) 1px,transparent 1px);background-size:16px 16px}
+.card-st .tape{left:50%;transform:translateX(-50%) rotate(3deg);width:80px}
+.card-st .stars{position:absolute;right:-14px;top:-18px}
+.stamp-st{transform:rotate(3deg)}
+.stamp{width:132px;height:132px;border-radius:50%;border:4px double var(--red);display:grid;place-content:center;justify-items:center;gap:2px;color:var(--red);transform:rotate(-12deg);background:radial-gradient(circle,rgba(195,49,59,.06),transparent 70%)}
+.stamp b{color:var(--red);font-size:2.1rem}
+.stamp .typed{font-size:.6rem;font-weight:700}
+.js .stamp{transform:rotate(-12deg) scale(1.6);opacity:.001}
+.js .seen .stamp{animation:stampIn .5s cubic-bezier(.3,1.6,.5,1) .55s forwards}
+@keyframes stampIn{0%{transform:rotate(-30deg) scale(1.8);opacity:0}100%{transform:rotate(-12deg) scale(1);opacity:.92}}
+
+/* torn paper edges between bands */
+.tear-t,.tear-b{position:relative}
+.tear-t::before,.tear-b::after{content:"";position:absolute;left:0;right:0;height:22px;z-index:2;pointer-events:none;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 24' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V9.2L1200 9.2L1187 17.1L1168 17.6L1146 17.0L1137 9.3L1118 12.5L1100 6.7L1088 8.2L1071 17.8L1049 12.4L1043 12.7L1035 12.5L1013 4.4L1005 17.3L994 9.5L987 5.4L973 11.5L951 17.6L943 9.8L932 8.0L923 13.8L903 4.4L891 5.6L883 4.0L876 9.4L868 7.3L861 5.0L844 5.7L832 10.3L813 18.0L795 18.4L788 14.8L772 12.2L755 19.2L740 9.9L727 4.1L717 13.4L703 7.7L694 6.8L685 19.3L665 9.7L652 8.5L633 17.1L612 12.8L599 5.3L579 10.3L569 6.1L551 4.9L543 6.7L530 4.4L513 10.2L502 17.2L481 14.4L463 5.0L447 11.6L426 17.4L412 13.3L397 15.1L386 18.0L371 16.2L354 4.6L340 6.4L322 10.7L314 19.7L304 15.7L284 12.4L268 7.9L251 16.7L240 11.3L225 9.0L212 14.9L203 5.0L196 12.8L184 14.2L169 6.9L150 8.9L142 6.3L131 17.7L124 19.6L112 13.2L91 14.0L81 6.0L62 10.8L54 5.1L42 4.6L27 4.9L16 12.6L8 14.4L0 9.2Z'/%3E%3C/svg%3E") 0 0/1200px 100% repeat-x;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 24' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V9.2L1200 9.2L1187 17.1L1168 17.6L1146 17.0L1137 9.3L1118 12.5L1100 6.7L1088 8.2L1071 17.8L1049 12.4L1043 12.7L1035 12.5L1013 4.4L1005 17.3L994 9.5L987 5.4L973 11.5L951 17.6L943 9.8L932 8.0L923 13.8L903 4.4L891 5.6L883 4.0L876 9.4L868 7.3L861 5.0L844 5.7L832 10.3L813 18.0L795 18.4L788 14.8L772 12.2L755 19.2L740 9.9L727 4.1L717 13.4L703 7.7L694 6.8L685 19.3L665 9.7L652 8.5L633 17.1L612 12.8L599 5.3L579 10.3L569 6.1L551 4.9L543 6.7L530 4.4L513 10.2L502 17.2L481 14.4L463 5.0L447 11.6L426 17.4L412 13.3L397 15.1L386 18.0L371 16.2L354 4.6L340 6.4L322 10.7L314 19.7L304 15.7L284 12.4L268 7.9L251 16.7L240 11.3L225 9.0L212 14.9L203 5.0L196 12.8L184 14.2L169 6.9L150 8.9L142 6.3L131 17.7L124 19.6L112 13.2L91 14.0L81 6.0L62 10.8L54 5.1L42 4.6L27 4.9L16 12.6L8 14.4L0 9.2Z'/%3E%3C/svg%3E") 0 0/1200px 100% repeat-x}
+.tear-t::before{top:-1px;background:var(--tt,var(--cream))}
+.tear-b::after{bottom:-1px;background:var(--tb,var(--cream));transform:scaleY(-1)}
 
 /* section frame */
 section{scroll-margin-top:80px}
@@ -185,7 +211,7 @@ section{scroll-margin-top:80px}
 .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:36px;border-bottom:3px solid var(--maroon);padding-left:6px}
 .tab{font:inherit;font-family:var(--f-type);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:9px 16px 7px;border:2px solid var(--maroon);border-bottom:0;border-radius:10px 10px 0 0;background:var(--blush);color:var(--maroon);cursor:pointer;margin-bottom:-3px}
 .tab[aria-pressed="true"]{background:var(--maroon);color:var(--cream)}
-.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:52px 34px;padding-top:14px}
+.videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:52px 34px;padding-top:24px}
 @media (max-width:920px){.videos{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:580px){.videos{grid-template-columns:1fr}}
 .vid{display:block;text-decoration:none;color:inherit;transition:transform .2s ease}
@@ -344,10 +370,38 @@ a.vid:hover .play{transform:scale(1.1)}
 .cursor-ring span{opacity:0;transition:opacity .15s}
 .cursor-ring.watch span{opacity:1}
 
-/* scroll pop-in (content stays visible; only position settles) */
-.js .pop{transform:translateY(22px) rotate(var(--r,0deg));transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.js .pop.seen{transform:translateY(0) rotate(var(--r,0deg))}
-@media (prefers-reduced-motion:reduce){#loader{display:none}#curtain{display:none}}
+/* scroll pop-in (content stays visible; only position settles). Uses `translate` so element rotations survive. */
+.js .pop,.js .stagger>*{translate:0 26px;transition:translate .8s cubic-bezier(.2,.9,.25,1.15)}
+.js .pop.seen,.js .stagger.seen>*{translate:0 0}
+.js .stagger.seen>*:nth-child(2){transition-delay:.09s}
+.js .stagger.seen>*:nth-child(3){transition-delay:.18s}
+.js .stagger.seen>*:nth-child(4){transition-delay:.27s}
+.js .stagger.seen>*:nth-child(5){transition-delay:.36s}
+/* hand-drawn underline that draws itself */
+.swoop{display:block;width:100%;height:16px;margin-top:-2px;overflow:visible}
+.swoop path{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:0;transition:stroke-dashoffset 1s ease .35s}
+.js .pop:not(.seen) .swoop path{stroke-dashoffset:420}
+/* hero doodles */
+.hero{position:relative;overflow:hidden}
+.doodle{position:absolute;pointer-events:none;color:var(--maroon);animation:bob 6s ease-in-out infinite}
+.doodle.d2{animation-duration:7.5s;animation-delay:-2s}
+.doodle.d3{animation-duration:5.2s;animation-delay:-1s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-10px) rotate(calc(var(--r,0deg) + 12deg))}}
+.hero h1{animation:titleIn .9s cubic-bezier(.2,1.3,.4,1) 1.9s backwards}
+@keyframes titleIn{from{transform:translateY(24px) rotate(-2deg)}to{transform:none}}
+.seal{transition:transform .3s}
+.invite:hover .seal{transform:rotate(-14deg) scale(1.06)}
+.flower{transition:transform .6s}
+*:hover>.flower{transform:rotate(90deg)}
+/* coming-soon note */
+.soon-note{grid-column:1/-1;position:relative;justify-self:start;max-width:560px;background:var(--paper);color:var(--ink);padding:30px 28px 26px;transform:rotate(-1.5deg);box-shadow:0 16px 26px -14px rgba(0,0,0,.55);background-image:repeating-linear-gradient(to bottom,transparent 0 31px,#DCE4EE 31px 32px);margin-top:26px}
+.soon-note .tape{left:28px}
+.soon-note h3{font-family:var(--f-body);font-weight:900;font-size:2rem;color:var(--red);letter-spacing:-.04em;line-height:1}
+.soon-note p{font-family:var(--f-hand);font-size:1.2rem;color:var(--soft);margin-top:8px;line-height:1.35}
+.soon-note ul{margin:10px 0 0;padding-left:20px;font-family:var(--f-hand);font-size:1.15rem;line-height:1.55;color:var(--maroon);columns:2;column-gap:28px}
+@media (max-width:520px){.soon-note ul{columns:1}}
+.soon-note li::marker{color:var(--red)}
+@media (prefers-reduced-motion:reduce){#loader{display:none}#curtain{display:none}.washi-track{animation:none}.doodle{animation:none}.js .stamp{transform:rotate(-12deg);opacity:.92}}
 
 /* video player pop-up */
 #player{position:fixed;inset:0;z-index:95;background:rgba(42,14,21,.78);display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
@@ -425,15 +479,19 @@ footer .typed{font-size:.7rem}
 </header>
 
 <main id="top">
-  <section class="hero grid-red">
+  <section class="hero grid-red tear-b">
+    <svg class="doodle" width="70" height="70" style="left:3%;top:14%;--r:-10deg;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
+    <svg class="doodle d2" width="44" height="44" style="right:6%;top:9%;--r:14deg;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
+    <svg class="doodle d3" width="60" height="60" viewBox="0 0 60 60" style="right:4%;bottom:9%;--r:0deg" aria-hidden="true"><path d="M30 6l5 15 16 1-12.5 10 4.5 15.5L30 39l-13 8.5L21.5 32 9 22l16-1z" fill="none" stroke="#F3D6D4" stroke-width="2.5" stroke-linejoin="round"/></svg>
+    <svg class="doodle d2" width="90" height="40" viewBox="0 0 90 40" style="right:30%;top:6%;--r:-6deg" aria-hidden="true"><path d="M4 30c12-22 24 8 36-10s22-10 30 2 12 2 16-8" fill="none" stroke="#F3D6D4" stroke-width="2.5" stroke-linecap="round"/></svg>
     <div class="wrap">
       <div>
         <span class="typed">Bergen County Academies · Hackensack, NJ</span>
-        <h1 class="cond">Research. Debate. Negotiate.<span class="script">the BCA MUN comMUNity</span></h1>
+        <h1 class="cond">BCA Model UN<span class="script">join the comMUNity</span></h1>
         <p class="lede">BCA's oldest and largest internationally minded club, home to AMUN, JAMUN and the BCA Travel Team. We train new delegates through scrimmages and our video library, compete at college conferences, and host our own high school conference every February.</p>
         <div class="ctas">
-          <a class="btn solid" href="#training">Watch training videos</a>
-          <a class="btn line" href="#scrimmages">See our scrimmages</a>
+          <a class="btn solid" href="https://www.academymodelun.org/" target="_blank" rel="noopener">AMUN XXVIII · academymodelun.org</a>
+          <a class="btn line" href="#training">Watch training videos</a>
         </div>
       </div>
       <div class="invite" aria-label="Invitation to new delegates">
@@ -448,29 +506,30 @@ footer .typed{font-size:.7rem}
     </div>
   </section>
 
-  <div class="stats">
+  <div class="stats" id="stats">
+    <div class="washi" aria-hidden="true"><div class="washi-track"><span>research. debate. negotiate. ✿ motion to open debate ✿ point of order ✿ unmod time ✿ present and voting ✿ research. debate. negotiate. ✿ motion to open debate ✿ point of order ✿ unmod time ✿ present and voting ✿&nbsp;</span><span>research. debate. negotiate. ✿ motion to open debate ✿ point of order ✿ unmod time ✿ present and voting ✿ research. debate. negotiate. ✿ motion to open debate ✿ point of order ✿ unmod time ✿ present and voting ✿&nbsp;</span></div></div>
     <div class="wrap">
-      <div class="torn">
-        <div class="stat"><b>450+</b><span>student delegates at AMUN XXVII</span></div>
-        <div class="stat"><b>28</b><span>high schools across bergen county + beyond</span></div>
-        <div class="stat"><b>72</b><span>individual delegate awards given</span></div>
-        <div class="stat"><b>1997</b><span>the year it all started</span></div>
+      <p class="hand stats-cap">AMUN XXVII, by the numbers ↓</p>
+      <div class="stat-board stagger">
+        <div class="st ticket"><span class="typed">admit one · delegate</span><b><span class="count" data-to="450">450</span>+</b><span class="lbl">student delegates</span></div>
+        <div class="st sticky-st"><b class="count" data-to="28">28</b><span class="lbl">high schools across bergen county + beyond</span></div>
+        <div class="st card-st"><span class="tape" aria-hidden="true"></span><b class="count" data-to="72">72</b><span class="lbl">delegate awards given</span><svg class="stars" width="54" height="40" viewBox="0 0 54 40" aria-hidden="true"><path d="M10 4l2.6 7 7.4.4-5.8 4.6 2 7.2L10 19l-6.2 4.2 2-7.2L0 11.4l7.4-.4z" fill="none" stroke="#C3313B" stroke-width="2" stroke-linejoin="round"/><path d="M40 16l1.8 4.6 5 .3-3.9 3.1 1.3 4.8L40 26l-4.2 2.8 1.3-4.8-3.9-3.1 5-.3z" fill="none" stroke="#631A2D" stroke-width="2" stroke-linejoin="round"/></svg></div>
+        <div class="st stamp-st"><div class="stamp"><span class="typed">est.</span><b>1997</b><span class="typed">BCA · MUN</span></div><span class="lbl">the year it all started</span></div>
       </div>
     </div>
   </div>
 
   <!-- TRAINING -->
-  <section id="training" class="sec grid-red on-red">
+  <section id="training" class="sec grid-red on-red tear-t tear-b">
     <div class="wrap">
       <div class="sec-head pop">
         <span class="typed">Training library</span>
         <h2 class="cond">New delegate? <span class="script">start here</span></h2>
         <p>Training videos from our team, from your first speech to writing operative clauses. Start with the unmod video below. More are on the way.</p>
       </div>
-      <div class="tabs" role="group" aria-label="Filter videos" id="filters"></div>
       <div class="videos" id="videos"></div>
 
-      <div class="cheat pop" aria-label="Procedure cheat sheet">
+      <div class="cheat stagger" aria-label="Procedure cheat sheet">
         <div class="sticky"><code>POINT OF ORDER</code><h3>procedure got broken</h3><p>Raise it when the chair or a delegate skips the rules.</p></div>
         <div class="sticky"><code>POINT OF INQUIRY</code><h3>ask the chair</h3><p>Use it when you're not sure what's happening or what's in order.</p></div>
         <div class="sticky"><code>PERAMBULATORY</code><h3>"Recalling," "Noting"</h3><p>Opening clauses that set the context of a resolution.</p></div>
@@ -557,7 +616,7 @@ footer .typed{font-size:.7rem}
       </div>
       <div>
         <p class="typed" style="color:var(--soft);margin-bottom:14px">BCAMUN's travel team conference list · 2025–2026 season</p>
-        <div class="folders pop">
+        <div class="folders stagger">
           <div class="folder" style="--f:#EADCD5"><span class="lbl">DEMUN</span><span class="when">oct '25</span></div>
           <div class="folder" style="--f:#E7C2C0"><span class="lbl">HOMMUNC</span><span class="when">nov '25</span></div>
           <div class="folder" style="--f:#D9989A"><span class="lbl">PMUNC</span><span class="when">nov '25</span></div>
@@ -569,7 +628,7 @@ footer .typed{font-size:.7rem}
   </section>
 
   <!-- AMUN -->
-  <section id="amun" class="sec grid-red on-red">
+  <section id="amun" class="sec grid-red on-red tear-t tear-b">
     <div class="wrap amun">
       <div>
         <div class="sec-head" style="margin-bottom:0">
@@ -620,24 +679,6 @@ footer .typed{font-size:.7rem}
     </div>
   </section>
 
-  <!-- HISTORY -->
-  <section class="sec" style="background:var(--maroon);color:#fff;padding-block:72px">
-    <div class="wrap">
-      <div class="sec-head on-red" style="margin-bottom:46px">
-        <span class="typed" style="color:var(--blush)">Our history</span>
-        <h2 class="cond" style="color:#fff">Since <span class="script" style="color:var(--blush)">1997</span></h2>
-      </div>
-      <ol class="timeline pop">
-        <li><b>1997</b><span>a 10th grade history class runs BCA's first mock UN, about 35 students</span></li>
-        <li><b>1998</b><span>first conference ever, at Yale</span></li>
-        <li><b>1998</b><span>first "Best Delegation" award at GWU's conference in D.C.</span></li>
-        <li><b>1999</b><span>the same students launch the first AMUN</span></li>
-        <li><b>2015</b><span>JAMUN debuts for middle schoolers</span></li>
-        <li><b>2027</b><span>AMUN XXVIII, Feb 4–5. see you there!</span></li>
-      </ol>
-    </div>
-  </section>
-
   <!-- TEAM -->
   <section id="team" class="sec">
     <div class="wrap">
@@ -646,13 +687,13 @@ footer .typed{font-size:.7rem}
         <h2 class="cond">Meet <span class="script">the people behind it</span></h2>
         <p>52 members across all four grades, led by a student secretariat and our two faculty advisors.</p>
       </div>
-      <div class="team pop">
+      <div class="team stagger">
         <div class="name-card"><span class="clip" aria-hidden="true"></span><span class="role">Faculty advisor</span><span class="nm">Mr. Kramer</span><p>Mark Kramer</p></div>
         <div class="name-card"><span class="clip" aria-hidden="true"></span><span class="role">Secretary-General, AMUN XXVIII</span><span class="nm">Grace Zhou</span><p>"Come to AMUN XXVIII!!"</p></div>
         <div class="name-card"><span class="clip" aria-hidden="true"></span><span class="role">Faculty advisor</span><span class="nm">Mrs. Wallace</span><p>Christine Wallace</p></div>
       </div>
       <p class="typed" style="color:var(--red);margin-top:56px">Our four divisions</p>
-      <div class="divs pop">
+      <div class="divs stagger">
         <div class="div-note"><span class="tape" aria-hidden="true"></span><h3>Internal</h3><p>club meetings, members, and keeping everyone in the loop</p></div>
         <div class="div-note"><span class="tape" aria-hidden="true"></span><h3>External</h3><p>partner schools, scrimmages, and conference outreach</p></div>
         <div class="div-note"><span class="tape" aria-hidden="true"></span><h3>Training</h3><p>new delegate training, the video library, and chair prep</p></div>
@@ -663,7 +704,7 @@ footer .typed{font-size:.7rem}
   </section>
 
   <!-- JOIN -->
-  <section id="join" class="sec dots-red">
+  <section id="join" class="sec dots-red tear-t tear-b" style="--tb:var(--maroon)">
     <div class="wrap join-box">
       <div>
         <h2 class="cond">Join the <span class="script">comMUNity</span></h2>
@@ -713,18 +754,10 @@ function toWatchUrl(u){
 }
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
-const fBox=document.getElementById("filters"), vBox=document.getElementById("videos");
-let active="All";
-try{const s=localStorage.getItem("bcamun-tab"); if(s&&FILTERS.includes(s)) active=s;}catch(e){}
-
-function renderFilters(){
-  fBox.innerHTML = FILTERS.map(f=>`<button class="tab" id="tab-${f.replace(/\W+/g,'-').toLowerCase()}" aria-pressed="${f===active}">${esc(f)}</button>`).join("");
-  [...fBox.children].forEach((b,i)=>b.addEventListener("click",()=>{active=FILTERS[i];try{localStorage.setItem("bcamun-tab",active)}catch(e){}renderFilters();renderVideos();}));
-}
+const vBox=document.getElementById("videos");
+function idOf(u){const m=u.match(/\/file\/d\/([\w-]+)/)||u.match(/[?&]id=([\w-]+)/);return m?m[1]:null}
 function renderVideos(){
-  const list = VIDEOS.filter(v=>active==="All"||v.category===active);
-  if(!list.length){vBox.innerHTML=`<p class="empty">no ${esc(active.toLowerCase())} videos yet, check back soon!</p>`;return;}
-  const ready=list.filter(v=>v.url.trim()), soon=list.filter(v=>!v.url.trim());
+  const ready=VIDEOS.filter(v=>v.url.trim()), soon=VIDEOS.filter(v=>!v.url.trim());
   const feat=ready.map(v=>{
     const id=idOf(v.url);
     const screen = EMBED && id
@@ -734,21 +767,10 @@ function renderVideos(){
       <div><span class="now">now playing</span><h3>${esc(v.title)}<span class="script">${esc(v.category.toLowerCase())}</span></h3><p>${esc(v.blurb)}</p>
       <a class="btn line open" href="${esc(toWatchUrl(v.url))}" target="_blank" rel="noopener">Open in Google Drive</a></div></div>`;
   }).join("");
-  vBox.innerHTML = feat + (soon.length?`<p class="soon-label">coming soon…</p>`:"") + soon.map(v=>{
-    const ready=!!v.url.trim();
-    const bg=BG[v.category]||"var(--maroon)";
-    const inner=`<div class="polaroid"><span class="clip" aria-hidden="true"></span>
-      <div class="thumb grid-red" style="background-color:${bg}"><span class="word">${esc(v.category)}</span>
-        ${ready?`<span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M2 1.5v19l16-9.5z" fill="#631A2D"/></svg></span>`:`<span class="soon">coming soon</span>`}
-        ${v.duration?`<span class="dur">${esc(v.duration)}</span>`:""}</div>
-      <div class="cap"><span class="typed">${esc(v.category)}</span><h3>${esc(v.title)}</h3><p>${esc(v.blurb)}</p></div></div>`;
-    return ready
-      ? `<a class="vid" data-title="${esc(v.title)}" href="${esc(toWatchUrl(v.url))}" target="_blank" rel="noopener" aria-label="Watch ${esc(v.title)} in Google Drive">${inner}</a>`
-      : `<div class="vid is-soon">${inner}</div>`;
-  }).join("");
+  const note = soon.length ? `<div class="soon-note"><span class="tape" aria-hidden="true"></span><h3>more coming soon!</h3><p>our training team is filming these next:</p><ul>${soon.map(v=>`<li>${esc(v.title)}</li>`).join("")}</ul></div>` : "";
+  vBox.innerHTML = feat + note;
 }
-function idOf(u){const m=u.match(/\/file\/d\/([\w-]+)/)||u.match(/[?&]id=([\w-]+)/);return m?m[1]:null}
-renderFilters(); renderVideos();
+renderVideos();
 
 const modal=document.getElementById("player"), frame=document.getElementById("player-frame"),
       pTitle=document.getElementById("player-title"), pLink=document.getElementById("player-link");
@@ -800,7 +822,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()}
 
   /* page transitions on in-page links */
   const curtain=document.getElementById("curtain"), lbl=document.getElementById("curtain-lbl");
-  const names={top:"welcome!",scrimmages:"scrimmages",training:"training",travel:"travel team",amun:"AMUN",photos:"the scrapbook",team:"the team",join:"join us"};
+  const names={top:"welcome!",scrimmages:"scrimmages",training:"training",travel:"travel team",amun:"AMUN",team:"the team",join:"join us"};
   let busy=false;
   document.addEventListener("click",e=>{
     const a=e.target.closest('a[href^="#"]'); if(!a) return;
@@ -818,12 +840,29 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()}
     },440);
   });
 
+  /* swoop underline under each script word in section titles */
+  document.querySelectorAll(".sec-head h2 .script").forEach(sp=>{
+    sp.style.display="inline-block";
+    sp.insertAdjacentHTML("beforeend",'<svg class="swoop" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10C40 4 90 2 130 6s50 6 66 0"/></svg>');
+  });
+
+  /* count-up numbers (they show final values until the moment they animate) */
+  const countUp=el=>{
+    const to=+el.dataset.to, t0=performance.now(), dur=1400;
+    const step=now=>{const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(step)};
+    requestAnimationFrame(step);
+  };
+
   /* scroll pop-in */
-  const pops=[...document.querySelectorAll(".pop")];
+  const targets=[...document.querySelectorAll(".pop,.stagger,#stats")];
+  const reveal=el=>{
+    el.classList.add("seen");
+    if(el.id==="stats"){el.querySelector(".stat-board").classList.add("seen");if(!reduce) el.querySelectorAll(".count").forEach(countUp);}
+  };
   if("IntersectionObserver" in window && !reduce){
-    const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("seen");io.unobserve(en.target);}}),{rootMargin:"0px 0px -8% 0px"});
-    pops.forEach(p=>io.observe(p));
-  } else pops.forEach(p=>p.classList.add("seen"));
+    const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){reveal(en.target);io.unobserve(en.target);}}),{rootMargin:"0px 0px -10% 0px"});
+    targets.forEach(t=>{ if(t.id==="stats"||!t.closest("#stats")) io.observe(t); });
+  } else targets.forEach(reveal);
 
   /* custom cursor (mouse/trackpad only) */
   if(matchMedia("(hover: hover) and (pointer: fine)").matches && !reduce){
