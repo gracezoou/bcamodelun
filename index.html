@@ -83,6 +83,7 @@ nav.links{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
 nav.links a{text-decoration:none;font-family:var(--f-type);font-weight:700;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--maroon);padding:7px 10px;border-radius:4px}
 nav.links a:hover{background:var(--maroon);color:var(--cream)}
 @media (max-width:760px){nav.links a:not(.keep){display:none}.brand small{display:none}}
+@media (max-width:480px){.brand b{font-size:1rem;white-space:nowrap}.brand img{width:40px;height:40px}nav.links a.keep+a.keep{display:none}}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-body);font-weight:600;font-size:.95rem;text-decoration:none;padding:12px 20px;border-radius:999px;border:2px solid currentColor;transition:transform .15s ease}
@@ -113,9 +114,31 @@ nav.links a:hover{background:var(--maroon);color:var(--cream)}
 .to-from div{display:grid;grid-template-columns:64px minmax(0,1fr);border-bottom:1px solid var(--maroon);padding-bottom:2px}
 .to-from em{font-style:normal;font-family:Georgia,serif;font-size:1rem}
 
+/* envelope that opens to reveal the group photo */
+.env-scene{--w:min(470px,88vw);justify-self:center;padding-top:calc(var(--w)*.46);perspective:1200px;width:var(--w)}
+.envelope{position:relative;width:var(--w);aspect-ratio:47/31;max-width:100%;transform:rotate(2deg)}
+.env-back,.env-front{position:absolute;inset:0;border-radius:4px}
+.env-back{background:#E6DED0;box-shadow:0 30px 44px -24px rgba(0,0,0,.65)}
+.env-front{z-index:3;background:var(--cream);clip-path:polygon(0 0,50% 50%,100% 0,100% 100%,0 100%);background-image:linear-gradient(to top right,transparent calc(50% - 1px),rgba(99,26,45,.14) 50%,transparent calc(50% + 1px)),linear-gradient(to top left,transparent calc(50% - 1px),rgba(99,26,45,.14) 50%,transparent calc(50% + 1px));display:flex;align-items:flex-end;padding:0 9% 7%}
+.env-front .to-from{width:100%;color:var(--maroon);font-size:clamp(.72rem,2.2vw,.9rem)}
+.env-front .to-from div{grid-template-columns:52px minmax(0,1fr)}
+.letter{position:absolute;z-index:2;left:10%;width:80%;top:5%;margin:0;background:#FBFAF7;padding:3.5% 3.5% 0;box-shadow:0 14px 26px -12px rgba(0,0,0,.55);transform:translateY(-62%) rotate(-4deg);transition:transform .35s ease}
+.letter img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.letter figcaption{font-family:var(--f-hand);color:var(--maroon);font-size:clamp(1rem,2.6vw,1.3rem);text-align:center;padding:6px 0 8px}
+.letter .clip{top:-18px}
+.envelope:hover .letter{transform:translateY(-66%) rotate(-2deg)}
+.env-flap{position:absolute;z-index:1;left:0;right:0;top:0;height:56%;transform-origin:top center;transform:rotateX(180deg);transform-style:preserve-3d}
+.env-flap::before{content:"";position:absolute;inset:0;background:#EDE5D8;clip-path:polygon(0 0,100% 0,50% 100%);filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.env-flap .seal{position:absolute;left:50%;bottom:-14%;width:clamp(58px,15vw,78px);height:clamp(58px,15vw,78px);margin:0;transform:translateX(-50%);backface-visibility:hidden}
+.js .env-flap{animation:flapOpen .75s cubic-bezier(.6,0,.3,1) 2.1s backwards}
+.js .letter{animation:letterOut 1s cubic-bezier(.2,.9,.25,1.1) 2.75s backwards}
+@keyframes flapOpen{0%{transform:rotateX(0);z-index:4}49%{z-index:4}50%{z-index:1}100%{transform:rotateX(180deg);z-index:1}}
+@keyframes letterOut{from{transform:translateY(0) rotate(0)}to{transform:translateY(-62%) rotate(-4deg)}}
+@media (max-width:880px){.env-scene{margin-top:10px}}
+
 /* stats board */
-.stats{position:relative;background:var(--cream);padding-block:0 70px}
-.washi{position:relative;z-index:3;margin:-22px -2% 0;transform:rotate(-1.6deg);background:rgba(243,214,212,.94);background-image:repeating-linear-gradient(90deg,transparent 0 22px,rgba(195,49,59,.08) 22px 24px);box-shadow:0 4px 10px -4px rgba(42,14,21,.35);overflow:hidden;white-space:nowrap;-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%}
+.stats{position:relative;background:var(--cream);padding-block:0 70px;overflow:hidden;padding-top:30px;margin-top:-30px}
+.washi{position:relative;z-index:3;margin:-22px -12px 0;transform:rotate(-1.6deg);background:rgba(243,214,212,.94);background-image:repeating-linear-gradient(90deg,transparent 0 22px,rgba(195,49,59,.08) 22px 24px);box-shadow:0 4px 10px -4px rgba(42,14,21,.35);overflow:hidden;white-space:nowrap;-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/10px 100%}
 .washi-track{display:inline-flex;animation:marquee 38s linear infinite}
 .washi-track span{font-family:var(--f-hand);font-size:1.25rem;color:var(--maroon);padding:10px 0 12px}
 @keyframes marquee{to{transform:translateX(-50%)}}
@@ -391,6 +414,7 @@ a.vid:hover .play{transform:scale(1.1)}
 @keyframes titleIn{from{transform:translateY(24px) rotate(-2deg)}to{transform:none}}
 .seal{transition:transform .3s}
 .invite:hover .seal{transform:rotate(-14deg) scale(1.06)}
+.envelope:hover .env-flap .seal{transform:translateX(-50%) rotate(-10deg)}
 .flower{transition:transform .6s}
 *:hover>.flower{transform:rotate(90deg)}
 /* coming-soon note */
@@ -494,13 +518,21 @@ footer .typed{font-size:.7rem}
           <a class="btn line" href="#training">Watch training videos</a>
         </div>
       </div>
-      <div class="invite" aria-label="Invitation to new delegates">
-        <div class="script">You're Invited</div>
-        <div class="caps">Model UN Club</div>
-        <div class="seal" aria-hidden="true"><span>MUN</span></div>
-        <div class="to-from">
-          <div><span>To:</span><em>New Delegates</em></div>
-          <div><span>From:</span><em>BCA MUN Secretariat</em></div>
+      <div class="env-scene">
+        <div class="envelope">
+          <div class="env-back" aria-hidden="true"></div>
+          <figure class="letter">
+            <span class="clip" aria-hidden="true"></span>
+            <img src="assets/amun-group.jpg" alt="The AMUN XXVII secretariat, chairs and advisors in maroon BCA MUN quarter-zips">
+            <figcaption>amun xxvii crew ♡</figcaption>
+          </figure>
+          <div class="env-front" aria-hidden="true">
+            <div class="to-from">
+              <div><span>To:</span><em>New Delegates</em></div>
+              <div><span>From:</span><em>BCA MUN</em></div>
+            </div>
+          </div>
+          <div class="env-flap" aria-hidden="true"><div class="seal"><span>MUN</span></div></div>
         </div>
       </div>
     </div>
@@ -549,7 +581,7 @@ footer .typed{font-size:.7rem}
 
       <div class="scrim-layout">
         <div class="notebook pop">
-          <svg class="flower" width="64" height="64" style="right:-22px;top:-26px;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
+          <svg class="flower" width="64" height="64" style="right:-8px;top:-26px;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
           <div class="highlights-title">Highlights</div>
           <p class="hand" style="font-size:1.15rem;color:var(--soft);margin-top:4px">from our first inter-school scrimmage, last february</p>
           <div class="hl-cols">
