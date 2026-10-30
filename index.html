@@ -163,8 +163,8 @@ nav.links a:hover{background:var(--maroon);color:var(--cream)}
 .stamp b{color:var(--red);font-size:2.1rem}
 .stamp .typed{font-size:.6rem;font-weight:700}
 .js .stamp{transform:rotate(-12deg) scale(1.6);opacity:.001}
-.js .seen .stamp{animation:stampIn .5s cubic-bezier(.3,1.6,.5,1) .55s forwards}
-@keyframes stampIn{0%{transform:rotate(-30deg) scale(1.8);opacity:0}100%{transform:rotate(-12deg) scale(1);opacity:.92}}
+.js .seen .stamp{animation:stampIn .75s cubic-bezier(.34,1.45,.64,1) .75s forwards}
+@keyframes stampIn{0%{transform:rotate(-34deg) scale(1.7);opacity:0}60%{opacity:.92}100%{transform:rotate(-12deg) scale(1);opacity:.92}}
 
 /* torn paper edges between bands */
 .tear-t,.tear-b{position:relative}
@@ -173,6 +173,7 @@ nav.links a:hover{background:var(--maroon);color:var(--cream)}
 .tear-b::after{bottom:-1px;background:var(--tb,var(--cream));transform:scaleY(-1)}
 
 /* section frame */
+section{overflow-x:clip}
 section{scroll-margin-top:80px}
 .sec{padding-block:88px}
 .sec-head{display:grid;gap:10px;margin-bottom:40px;max-width:720px}
@@ -332,6 +333,95 @@ a.vid:hover .play{transform:scale(1.1)}
 .role-chip{font-family:var(--f-hand);font-size:1.15rem;background:var(--blush);color:var(--maroon);padding:4px 14px;border-radius:3px;transform:rotate(-1deg)}
 .role-chip:nth-child(even){transform:rotate(1.2deg)}
 
+/* scrimmage recap */
+.scrim{position:relative;overflow-x:clip}
+.recap-tag{position:relative;display:grid;gap:10px;justify-items:start;background:var(--paper);padding:30px 30px 24px;box-shadow:0 18px 30px -18px rgba(42,14,21,.5);transform:rotate(-1deg);max-width:820px;background-image:radial-gradient(rgba(195,49,59,.18) 1.2px,transparent 1.4px);background-size:18px 18px}
+.recap-tag .tape{left:auto;right:40px}
+.recap-tag .typed{color:var(--red);font-weight:700}
+.recap-title{font-family:var(--f-body);font-weight:900;font-size:clamp(2rem,4.6vw,3.2rem);letter-spacing:-.045em;line-height:1;color:var(--maroon)}
+.recap-title em{font-style:normal;font-family:var(--f-script);font-weight:400;color:var(--red);font-size:1.15em;letter-spacing:0}
+.recap-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--f-hand);font-size:1.2rem;color:var(--soft)}
+.recap-meta b{font-family:var(--f-type);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-right:6px}
+
+.field-notes{margin:64px 0 30px}
+.fn-label{color:var(--soft);margin-bottom:12px}
+.fn-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:3px solid var(--maroon);border-bottom:1px solid var(--line)}
+.fn{display:grid;gap:4px;padding:22px 18px;border-right:1px dashed var(--line)}
+.fn:last-child{border-right:0}
+.fn b{font-family:var(--f-body);font-weight:900;font-size:clamp(2.6rem,6vw,4rem);line-height:.95;letter-spacing:-.05em;color:var(--red);font-variant-numeric:tabular-nums}
+.fn span{font-family:var(--f-hand);font-size:1.2rem;color:var(--maroon);line-height:1.2}
+@media (max-width:760px){.fn-row{grid-template-columns:repeat(2,minmax(0,1fr))}.fn:nth-child(2){border-right:0}.fn:nth-child(-n+2){border-bottom:1px dashed var(--line)}}
+
+.cmte-row{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;margin-top:90px}
+.cmte-row.flip .fan{order:2}
+@media (max-width:880px){.cmte-row{grid-template-columns:1fr;gap:40px;margin-top:70px}.cmte-row.flip .fan{order:0}}
+.fan{position:relative;aspect-ratio:5/4;max-width:100%}
+.fp{position:absolute;margin:0;width:62%;background:#FBFAF7;padding:10px 10px 26px;box-shadow:0 18px 30px -16px rgba(42,14,21,.6);cursor:zoom-in;transition:transform 1s cubic-bezier(.34,1.4,.64,1),box-shadow .3s}
+.fp img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.fp .clip{top:-20px}
+.fp:hover{z-index:5;box-shadow:0 26px 40px -16px rgba(42,14,21,.7)}
+.f1{left:0;top:4%;transform:rotate(-7deg);z-index:1}
+.f2{right:0;top:0;transform:rotate(6deg);z-index:2}
+.f3{left:19%;bottom:0;transform:rotate(-1.5deg);z-index:3}
+.f1:hover{transform:rotate(-4deg) scale(1.04)}
+.f2:hover{transform:rotate(3deg) scale(1.04)}
+.f3:hover{transform:rotate(0) scale(1.04)}
+.js .fan.stacked .fp{transform:translate(var(--sx,0),var(--sy,0)) rotate(0deg) scale(.9)}
+.js .fan.stacked .f1{--sx:30%;--sy:12%}
+.js .fan.stacked .f2{--sx:-30%;--sy:16%}
+.fan .f2{transition-delay:.08s}.fan .f1{transition-delay:.16s}
+
+.cmte-notes{position:relative;background:var(--paper);padding:34px 30px 30px 54px;box-shadow:0 16px 28px -16px rgba(42,14,21,.45);background-image:linear-gradient(90deg,transparent 36px,rgba(195,49,59,.35) 36px 38px,transparent 38px),repeating-linear-gradient(to bottom,transparent 0 33px,#DCE4EE 33px 34px);transform:rotate(1.2deg)}
+.flip .cmte-notes{transform:rotate(-1.2deg)}
+.cmte-num{font-family:var(--f-type);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.cmte-notes h3{font-family:var(--f-body);font-weight:900;font-size:clamp(2.4rem,5vw,3.2rem);letter-spacing:-.05em;line-height:1;color:var(--red);text-shadow:3px 3px 0 var(--blush);margin-top:6px}
+.cmte-def{font-family:var(--f-hand);font-size:1.3rem;color:var(--maroon);margin-top:10px;line-height:1.3}
+.cmte-notes ul{margin:14px 0 0;padding-left:20px;font-family:var(--f-hand);font-size:1.2rem;line-height:1.6;color:var(--ink)}
+.cmte-notes li::marker{color:var(--red)}
+.cmte-notes .r{color:var(--red)}
+.cmte-notes u{text-decoration-thickness:2px;text-underline-offset:3px}
+
+/* camera roll film strip */
+.roll{margin:100px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0;overflow:hidden;background:#1C1416;padding-block:26px;transform:rotate(-1.2deg);box-shadow:0 20px 30px -18px rgba(0,0,0,.6);position:relative}
+.roll::before,.roll::after{content:"";position:absolute;left:0;right:0;height:12px;background:repeating-linear-gradient(90deg,transparent 0 10px,#F3EEE4 10px 22px,transparent 22px 34px);opacity:.85}
+.roll::before{top:7px}.roll::after{bottom:7px}
+.roll-track{display:flex;gap:14px;width:max-content;animation:roll 55s linear infinite}
+.roll:hover .roll-track{animation-play-state:paused}
+@keyframes roll{to{transform:translateX(-50%)}}
+.frame{margin:0;height:200px;flex:none;cursor:zoom-in;transition:transform .3s}
+.frame:hover{transform:scale(1.05)}
+.frame img{height:100%;width:auto;display:block;filter:saturate(1.05) contrast(1.03)}
+@media (max-width:600px){.frame{height:150px}}
+
+.scrim-end{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:48px;align-items:center;margin-top:90px}
+@media (max-width:880px){.scrim-end{grid-template-columns:1fr}}
+.torn-note{position:relative;margin:0;background:var(--paper);padding:38px 34px 34px;box-shadow:0 16px 26px -16px rgba(42,14,21,.45);transform:rotate(-1.5deg);-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%}
+.torn-note p{font-family:var(--f-hand);font-size:clamp(1.35rem,2.6vw,1.7rem);line-height:1.5;color:var(--maroon);background-image:repeating-linear-gradient(to bottom,transparent 0 calc(1.5em - 1px),var(--line) calc(1.5em - 1px) 1.5em);}
+.torn-note cite{display:block;margin-top:14px;font-style:normal;font-family:var(--f-body);font-weight:800;font-size:1.4rem;color:var(--red);letter-spacing:-.03em;transform:rotate(-2deg)}
+
+/* lightbox */
+#lb{position:fixed;inset:0;z-index:95;background:rgba(28,10,16,.86);display:grid;place-items:center;padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:lbIn .3s ease}
+#lb img{max-width:min(1000px,100%);max-height:86vh;background:#FBFAF7;padding:12px 12px 36px;box-shadow:0 30px 60px rgba(0,0,0,.5);transform:rotate(-1deg);animation:lbPop .45s cubic-bezier(.34,1.4,.64,1)}
+#lb-x{position:absolute;top:max(14px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:var(--cream);color:var(--maroon);font-size:1.6rem;line-height:1;cursor:pointer}
+@keyframes lbIn{from{opacity:0}}
+@keyframes lbPop{from{transform:scale(.85) rotate(-6deg)}}
+
+/* photo collage */
+.collage{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:54px 30px;padding-top:20px;align-items:start}
+.ph-card{position:relative;margin:0;background:#FBFAF7;padding:12px 12px 4px;box-shadow:0 18px 28px -16px rgba(42,14,21,.55);transition:transform .3s ease}
+.ph-card img{display:block;width:100%;height:auto;max-width:100%}
+.ph-card figcaption{font-family:var(--f-hand);font-size:1.25rem;color:var(--maroon);text-align:center;padding:8px 4px 6px}
+.ph-card figcaption b{color:var(--red);font-weight:400}
+.ph-card .tape{left:50%;transform:translateX(-50%) rotate(-4deg)}
+.ph-card:hover{transform:rotate(0) scale(1.03)!important;z-index:2}
+.c1{grid-column:1/5;transform:rotate(-1.5deg)}
+.c2{grid-column:5/7;transform:rotate(2.5deg);margin-top:26px}
+.c3{grid-column:1/3;transform:rotate(1.8deg)}
+.c4{grid-column:3/5;transform:rotate(-2.2deg);margin-top:30px}
+.c5{grid-column:5/7;transform:rotate(1.2deg)}
+@media (max-width:820px){.collage{grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 22px}.c1{grid-column:1/-1}.c2,.c3,.c4,.c5{grid-column:auto;margin-top:0}}
+@media (max-width:480px){.collage{grid-template-columns:1fr}}
+
 /* divisions */
 .divs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 22px;margin-top:22px}
 @media (max-width:900px){.divs{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -394,23 +484,38 @@ a.vid:hover .play{transform:scale(1.1)}
 .cursor-ring.watch span{opacity:1}
 
 /* scroll pop-in (content stays visible; only position settles). Uses `translate` so element rotations survive. */
-.js .pop,.js .stagger>*{translate:0 26px;transition:translate .8s cubic-bezier(.2,.9,.25,1.15)}
-.js .pop.seen,.js .stagger.seen>*{translate:0 0}
-.js .stagger.seen>*:nth-child(2){transition-delay:.09s}
-.js .stagger.seen>*:nth-child(3){transition-delay:.18s}
-.js .stagger.seen>*:nth-child(4){transition-delay:.27s}
-.js .stagger.seen>*:nth-child(5){transition-delay:.36s}
+/* scroll reveals: things pop up as you scroll (only armed for content below the first screen) */
+.rv{opacity:0}
+.rv.rise{translate:0 48px}
+.rv.popin{translate:0 70px;scale:.84;rotate:-4deg}
+.rv.popin.r{rotate:4deg}
+.rv.slide-l{translate:-70px 0;rotate:-3deg}
+.rv.slide-r{translate:70px 0;rotate:3deg}
+.rv.in-view{opacity:1;translate:0 0;scale:1;rotate:0deg;transition:opacity .6s ease var(--d,0s),translate 1.05s cubic-bezier(.22,1,.36,1) var(--d,0s),scale 1.05s cubic-bezier(.34,1.5,.64,1) var(--d,0s),rotate 1.05s cubic-bezier(.34,1.5,.64,1) var(--d,0s),transform .35s ease}
+.rv.popin.in-view{transition:opacity .45s ease var(--d,0s),translate .95s cubic-bezier(.34,1.5,.64,1) var(--d,0s),scale .95s cubic-bezier(.34,1.5,.64,1) var(--d,0s),rotate 1.1s cubic-bezier(.34,1.5,.64,1) var(--d,0s),transform .35s ease}
+.par{will-change:translate}
+/* text: words rise into place */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .1em;margin:0 -.02em -.1em}
+.w>span{display:inline-block;transition:transform 1s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i,0) * 75ms)}
+.arm .w>span{transform:translateY(110%) rotate(5deg)}
+.arm.in .w>span{transform:none}
+/* text: handwriting writes itself on */
+.write{clip-path:inset(-30% 100% -30% -4%);transition:clip-path 1.3s cubic-bezier(.45,.05,.35,1) var(--d,.15s)}
+.write.in{clip-path:inset(-30% -6% -30% -4%)}
+/* text: typewriter labels */
+.typer{clip-path:inset(-20% 100% -20% 0)}
+.typer.in{clip-path:inset(-20% -2% -20% 0);transition:clip-path calc(var(--n,20) * 38ms) steps(var(--n,20))}
 /* hand-drawn underline that draws itself */
 .swoop{display:block;width:100%;height:16px;margin-top:-2px;overflow:visible}
 .swoop path{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:0;transition:stroke-dashoffset 1s ease .35s}
-.js .pop:not(.seen) .swoop path{stroke-dashoffset:420}
+.js .arm:not(.in) .swoop path{stroke-dashoffset:420}
 /* hero doodles */
 .hero{position:relative;overflow:hidden}
 .doodle{position:absolute;pointer-events:none;color:var(--maroon);animation:bob 6s ease-in-out infinite}
 .doodle.d2{animation-duration:7.5s;animation-delay:-2s}
 .doodle.d3{animation-duration:5.2s;animation-delay:-1s}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-10px) rotate(calc(var(--r,0deg) + 12deg))}}
-.hero h1{animation:titleIn .9s cubic-bezier(.2,1.3,.4,1) 1.9s backwards}
+
 @keyframes titleIn{from{transform:translateY(24px) rotate(-2deg)}to{transform:none}}
 .seal{transition:transform .3s}
 .invite:hover .seal{transform:rotate(-14deg) scale(1.06)}
@@ -425,7 +530,7 @@ a.vid:hover .play{transform:scale(1.1)}
 .soon-note ul{margin:10px 0 0;padding-left:20px;font-family:var(--f-hand);font-size:1.15rem;line-height:1.55;color:var(--maroon);columns:2;column-gap:28px}
 @media (max-width:520px){.soon-note ul{columns:1}}
 .soon-note li::marker{color:var(--red)}
-@media (prefers-reduced-motion:reduce){#loader{display:none}#curtain{display:none}.washi-track{animation:none}.doodle{animation:none}.js .stamp{transform:rotate(-12deg);opacity:.92}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1!important;translate:none!important;scale:none!important;rotate:none!important}.write,.typer{clip-path:none!important}.arm .w>span{transform:none!important}#loader{display:none}#curtain{display:none}.washi-track{animation:none}.doodle{animation:none}.js .stamp{transform:rotate(-12deg);opacity:.92}}
 
 /* video player pop-up */
 #player{position:fixed;inset:0;z-index:95;background:rgba(42,14,21,.78);display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px))}
@@ -497,6 +602,7 @@ footer .typed{font-size:.7rem}
       <a href="#scrimmages" class="keep">Scrimmages</a>
       <a href="#travel">Travel Team</a>
       <a href="#amun">AMUN</a>
+      <a href="#photos">Photos</a>
       <a href="#join">Join</a>
     </nav>
   </div>
@@ -552,7 +658,8 @@ footer .typed{font-size:.7rem}
   </div>
 
   <!-- TRAINING -->
-  <section id="training" class="sec grid-red on-red tear-t tear-b">
+  <section id="training" style="position:relative;overflow-x:clip" class="sec grid-red on-red tear-t tear-b">
+    <svg class="doodle par" data-speed="-.12" width="64" height="64" style="right:5%;top:120px;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg><svg class="doodle d2 par" data-speed=".1" width="40" height="40" style="left:3%;top:46%;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
     <div class="wrap">
       <div class="sec-head pop">
         <span class="typed">Training library</span>
@@ -571,74 +678,108 @@ footer .typed{font-size:.7rem}
   </section>
 
   <!-- SCRIMMAGES -->
-  <section id="scrimmages" class="sec">
+  <section id="scrimmages" class="sec scrim">
+    <svg class="doodle par" data-speed="-.1" width="90" height="40" viewBox="0 0 90 40" style="right:4%;top:70px;color:var(--red)" aria-hidden="true"><path d="M4 30c12-22 24 8 36-10s22-10 30 2 12 2 16-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
     <div class="wrap">
       <div class="sec-head pop">
         <span class="typed">Scrimmages</span>
-        <h2 class="cond">Model UN <span class="script">Scrimmage</span></h2>
+        <h2 class="cond">Model UN <span class="script">scrimmage</span></h2>
         <p>A scrimmage is a real committee in a low-stress room. You get a country and a topic, run actual parliamentary procedure, and chairs explain what's happening as it happens. It's the best way to get ready for your first conference.</p>
       </div>
 
-      <div class="scrim-layout">
-        <div class="notebook pop">
-          <svg class="flower" width="64" height="64" style="right:-8px;top:-26px;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
-          <div class="highlights-title">Highlights</div>
-          <p class="hand" style="font-size:1.15rem;color:var(--soft);margin-top:4px">from our first inter-school scrimmage, last february</p>
-          <div class="hl-cols">
-            <div>
-              <h3>30 sign ups</h3>
-              <ul>
-                <li class="r">first inter-school mun scrimmage</li>
-                <li>improved speaking skills (speaking games)</li>
-                <li>grasped parli pro</li>
-                <li>advanced dels experienced crisis for the first time</li>
-              </ul>
-            </div>
-            <div>
-              <h3>2 committees</h3>
-              <ul>
-                <li>guided committee = run like a committee, with explanations along the way</li>
-                <li class="r">hands-on learning!</li>
-                <li>all in a <u>low stress</u> environment</li>
-              </ul>
-            </div>
-          </div>
-          <div class="schools-note">
-            <span class="hand" style="font-size:1.15rem;color:var(--soft)">we scrimmaged with</span>
-            <span class="school-chip">Northern Valley Old Tappan</span>
-            <span class="school-chip">Dwight-Englewood</span>
-          </div>
-          <div class="nb-foot">
-            <span class="script-red">Can't wait for the next one!</span>
-            <span class="hand" style="font-size:1.1rem;color:var(--soft)">want your school there? dm us →</span>
-          </div>
+      <!-- recap ticket -->
+      <div class="recap-tag">
+        <span class="tape" aria-hidden="true"></span>
+        <span class="typed">scrimmage recap · no. 01</span>
+        <h3 class="recap-title">our first <em>inter-school</em> scrimmage</h3>
+        <div class="recap-meta">
+          <span><b>when</b> fri, feb 27, 2026 · 4:10–6:45 pm</span>
+          <span><b>where</b> BCA</span>
+          <span><b>with</b> Northern Valley Old Tappan + Dwight-Englewood</span>
         </div>
+      </div>
 
-        <div class="side-stack">
-          <div class="event-card">
-            <span class="tape" aria-hidden="true"></span>
-            <span class="typed">Next scrimmage · date TBA</span>
-            <h3>Model UN<span class="script">Scrimmage</span></h3>
-            <p>Last one ran Friday, Feb 27 from 4:10 to 6:45 in the Commons. New dates and the sign-up link drop on <b>@bcamodelun</b>.</p>
-          </div>
-          <div class="receipt">
-            <div class="ttl">**How a guided committee runs**</div>
-            <ol class="flow">
-              <li><div><b>Roll call</b><small>"present" or "present and voting"</small></div><i>5 min</i></li>
-              <li><div><b>Speakers list</b><small>everyone gives an opening speech</small></div><i>60 s each</i></li>
-              <li><div><b>Mod caucus</b><small>focused debate on one sub-topic</small></div><i>10 min</i></li>
-              <li><div><b>Unmod caucus</b><small>find your bloc, start writing</small></div><i>15 min</i></li>
-              <li><div><b>Working papers</b><small>blocs present their clauses</small></div><i>20 min</i></li>
-              <li><div><b>Vote + debrief</b><small>chairs give feedback to every del</small></div><i>15 min</i></li>
-            </ol>
-          </div>
+      <!-- field notes -->
+      <div class="field-notes">
+        <p class="fn-label typed">field notes</p>
+        <div class="fn-row">
+          <div class="fn"><b class="count" data-to="30">30</b><span>sign ups</span></div>
+          <div class="fn"><b class="count" data-to="2">2</b><span>committees</span></div>
+          <div class="fn"><b class="count" data-to="3">3</b><span>schools</span></div>
+          <div class="fn"><b>1st</b><span>inter-school mun scrimmage</span></div>
+        </div>
+      </div>
+
+      <!-- committee 01 -->
+      <article class="cmte-row">
+        <div class="fan" data-fan>
+          <figure class="fp f1"><img loading="lazy" src="assets/scrim-ga-speech.jpg" alt="A delegate gives a timed speech at the guided GA committee"></figure>
+          <figure class="fp f2"><img loading="lazy" src="assets/scrim-ga-mod.jpg" alt="Delegates around a table during a moderated caucus"></figure>
+          <figure class="fp f3"><span class="clip" aria-hidden="true"></span><img loading="lazy" src="assets/scrim-ga-unmod.jpg" alt="Delegates standing and talking during an unmoderated caucus"></figure>
+        </div>
+        <div class="cmte-notes">
+          <span class="cmte-num">committee 01</span>
+          <h3>guided GA</h3>
+          <p class="cmte-def">run like a real committee, with explanations along the way</p>
+          <ul>
+            <li>speaking games to warm up</li>
+            <li>timed speeches on the speakers list</li>
+            <li>grasped parli pro, one motion at a time</li>
+            <li class="r">hands-on learning, all in a <u>low stress</u> environment</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- committee 02 -->
+      <article class="cmte-row flip">
+        <div class="fan" data-fan>
+          <figure class="fp f1"><img loading="lazy" src="assets/scrim-cr-room.jpg" alt="Crisis committee delegates seated around tables in a U shape"></figure>
+          <figure class="fp f2"><img loading="lazy" src="assets/scrim-cr-delegates.jpg" alt="Crisis delegates discussing at their desks"></figure>
+          <figure class="fp f3"><span class="clip" aria-hidden="true"></span><img loading="lazy" src="assets/scrim-cr-dais.jpg" alt="The crisis dais reads an update with a five-minute timer on screen"></figure>
+        </div>
+        <div class="cmte-notes">
+          <span class="cmte-num">committee 02</span>
+          <h3>crisis</h3>
+          <p class="cmte-def">a fairytale crisis, complete with ogre hunters and puss in boots</p>
+          <ul>
+            <li class="r">advanced dels experienced crisis for the first time</li>
+            <li>crisis updates read live by the dais</li>
+            <li>five-minute timers, fast decisions</li>
+            <li>directives, backroom, and a lot of laughs</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- camera roll -->
+      <div class="roll" aria-label="Scrimmage camera roll">
+        <div class="roll-track">
+          <figure class="frame"><img loading="lazy" src="assets/scrim-ga-table.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-wide.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-speech.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-dais.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-standing.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-room.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-mod.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-delegates.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-unmod.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-table.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-wide.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-speech.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-dais.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-standing.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-room.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-mod.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-cr-delegates.jpg" alt=""></figure><figure class="frame"><img loading="lazy" src="assets/scrim-ga-unmod.jpg" alt=""></figure>
+        </div>
+      </div>
+
+      <!-- takeaway + next -->
+      <div class="scrim-end">
+        <blockquote class="torn-note">
+          <p>Delegates were able to improve skills through guided GA and crisis committees. We practiced speaking games, learned MUN basics, and met new delegates!</p>
+          <cite>can't wait for the next one ✶</cite>
+        </blockquote>
+        <div class="event-card">
+          <span class="tape" aria-hidden="true"></span>
+          <span class="typed">Next scrimmage · date TBA</span>
+          <h3>Model UN<span class="script">Scrimmage</span></h3>
+          <p>Open to every school in Bergen County. Dates and the sign-up link drop on <b>@bcamodelun</b>. Want your school there? DM us.</p>
+          <a class="btn maroon" href="https://www.instagram.com/bcamodelun/" target="_blank" rel="noopener" style="margin-top:14px">Sign up via @bcamodelun</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- lightbox -->
+  <div id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer"><button id="lb-x" aria-label="Close photo">×</button><img id="lb-img" alt=""></div>
+
   <!-- TRAVEL TEAM -->
-  <section id="travel" class="sec">
+  <section id="travel" style="position:relative;overflow-x:clip" class="sec">
+    <svg class="doodle d3 par" data-speed=".14" width="56" height="56" viewBox="0 0 60 60" style="left:2%;bottom:60px" aria-hidden="true"><path d="M30 6l5 15 16 1-12.5 10 4.5 15.5L30 39l-13 8.5L21.5 32 9 22l16-1z" fill="none" stroke="#C3313B" stroke-width="2.5" stroke-linejoin="round"/></svg>
     <div class="wrap travel">
       <div class="sec-head" style="margin-bottom:0">
         <span class="typed">BCA MUN Travel Team</span>
@@ -711,8 +852,30 @@ footer .typed{font-size:.7rem}
     </div>
   </section>
 
+  <!-- PHOTOS -->
+  <section id="photos" style="position:relative;overflow-x:clip" class="sec">
+    <svg class="doodle par" data-speed="-.14" width="54" height="54" style="left:2%;top:90px;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
+    <div class="wrap">
+      <div class="sec-head pop">
+        <span class="typed">The scrapbook</span>
+        <h2 class="cond">AMUN XXVII <span class="script">memories</span></h2>
+        <p>Two days, 450+ delegates, and a lot of gavels. A few favorites from last February.</p>
+      </div>
+      <div class="collage stagger">
+        <figure class="ph-card c1"><span class="clip" aria-hidden="true"></span><img loading="lazy" src="assets/photo-gavel.jpg" alt="The Secretary-General points a gavel at the AMUN XXVII staff, who pretend to fall back in the gym"><figcaption>secgen said <b>"order!"</b></figcaption></figure>
+        <figure class="ph-card c2"><span class="tape" aria-hidden="true"></span><img loading="lazy" src="assets/photo-chairs.jpg" alt="Three AMUN XXVII staff smiling together, one holding a gavel"><figcaption>chairs ♡</figcaption></figure>
+        <figure class="ph-card c3"><span class="clip" aria-hidden="true"></span><img loading="lazy" src="assets/photo-advisors.jpg" alt="Mr. Kramer and Mrs. Wallace with three students holding a thank-you poster in front of the AMUN XXVII screen"><figcaption>thank you, mr. kramer + mrs. wallace!</figcaption></figure>
+        <figure class="ph-card c4"><span class="tape" aria-hidden="true"></span><img loading="lazy" src="assets/photo-backs.jpg" alt="Four students in maroon BCA MUN sweatshirts pointing at the names on their backs"><figcaption>name on the back ✶</figcaption></figure>
+        <figure class="ph-card c5"><span class="clip" aria-hidden="true"></span><img loading="lazy" src="assets/photo-duo.jpg" alt="Two students in BCA MUN sweatshirts in front of the AMUN XXVII screen"><figcaption>see you at xxviii</figcaption></figure>
+        <svg class="flower" width="58" height="58" style="right:2%;top:-30px;color:var(--maroon)" aria-hidden="true"><use href="#flower"/></svg>
+      </div>
+      <div class="ctas" style="margin-top:56px"><a class="btn maroon" href="https://www.instagram.com/bcamodelun/" target="_blank" rel="noopener">More on @bcamodelun</a></div>
+    </div>
+  </section>
+
   <!-- TEAM -->
-  <section id="team" class="sec">
+  <section id="team" style="position:relative;overflow-x:clip" class="sec">
+    <svg class="doodle d2 par" data-speed=".12" width="60" height="60" viewBox="0 0 60 60" style="right:3%;top:80px" aria-hidden="true"><path d="M30 6l5 15 16 1-12.5 10 4.5 15.5L30 39l-13 8.5L21.5 32 9 22l16-1z" fill="none" stroke="#631A2D" stroke-width="2.5" stroke-linejoin="round"/></svg>
     <div class="wrap">
       <div class="sec-head pop">
         <span class="typed">The team</span>
@@ -842,7 +1005,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()}
   let lenis=null;
   if(!reduce && window.Lenis){
     try{
-      lenis=new Lenis({lerp:0.14,wheelMultiplier:1,smoothWheel:true,syncTouch:false,autoRaf:false,prevent:n=>!!(n.closest&&n.closest("#player"))});window.__lenis=lenis;
+      lenis=new Lenis({lerp:0.14,wheelMultiplier:1,smoothWheel:true,syncTouch:false,autoRaf:false,prevent:n=>!!(n.closest&&n.closest("#player,#lb"))});window.__lenis=lenis;
       const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
     }catch(e){lenis=null}
   }
@@ -854,7 +1017,7 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()}
 
   /* page transitions on in-page links */
   const curtain=document.getElementById("curtain"), lbl=document.getElementById("curtain-lbl");
-  const names={top:"welcome!",scrimmages:"scrimmages",training:"training",travel:"travel team",amun:"AMUN",team:"the team",join:"join us"};
+  const names={top:"welcome!",scrimmages:"scrimmages",training:"training",travel:"travel team",amun:"AMUN",photos:"memories",team:"the team",join:"join us"};
   let busy=false;
   document.addEventListener("click",e=>{
     const a=e.target.closest('a[href^="#"]'); if(!a) return;
@@ -878,23 +1041,159 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()}
     sp.insertAdjacentHTML("beforeend",'<svg class="swoop" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 10C40 4 90 2 130 6s50 6 66 0"/></svg>');
   });
 
-  /* count-up numbers (they show final values until the moment they animate) */
-  const countUp=el=>{
-    const to=+el.dataset.to, t0=performance.now(), dur=1400;
-    const step=now=>{const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(step)};
-    requestAnimationFrame(step);
-  };
+  const H0=innerHeight, below=el=>el.getBoundingClientRect().top>H0*0.92;
+  const anim=!reduce && "IntersectionObserver" in window;
 
-  /* scroll pop-in */
-  const targets=[...document.querySelectorAll(".pop,.stagger,#stats")];
-  const reveal=el=>{
-    el.classList.add("seen");
-    if(el.id==="stats"){el.querySelector(".stat-board").classList.add("seen");if(!reduce) el.querySelectorAll(".count").forEach(countUp);}
+  /* split headings into words */
+  const splitWords=h=>{
+    let i=0;
+    [...h.childNodes].forEach(n=>{
+      if(n.nodeType!==3||!n.textContent.trim()) return;
+      const frag=document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(t=>{
+        if(!t) return;
+        if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(t));return;}
+        const w=document.createElement("span");w.className="w";
+        const inner=document.createElement("span");inner.textContent=t;inner.style.setProperty("--i",i++);
+        w.appendChild(inner);frag.appendChild(w);
+      });
+      h.replaceChild(frag,n);
+    });
+    return i;
   };
-  if("IntersectionObserver" in window && !reduce){
-    const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){reveal(en.target);io.unobserve(en.target);}}),{rootMargin:"0px 0px -10% 0px"});
-    targets.forEach(t=>{ if(t.id==="stats"||!t.closest("#stats")) io.observe(t); });
-  } else targets.forEach(reveal);
+  const heads=[...document.querySelectorAll(".recap-title,.cmte-notes h3,.sec-head h2,.join-box h2,.event-card h3,.hero h1,.highlights-title,.hl-cols h3,.soon-note h3")];
+  heads.forEach(h=>{
+    const n=splitWords(h);
+    const sc=h.querySelector(".script"); if(sc){sc.classList.add("write");sc.style.setProperty("--d",(0.25+n*0.075)+"s");}
+  });
+
+  /* handwriting + typed labels */
+  const writes=[...document.querySelectorAll(".cmte-def,.cmte-notes ul,.recap-meta,.torn-note cite,.stats-cap,.nb-foot .script-red,.schools-note .hand,.hl-cols ul,.div-note p,.ph-card figcaption,.soon-note p,.now,.receipt .ttl,.name-card .nm,.folder .when")];
+  writes.forEach(el=>el.classList.add("write"));
+  const typers=[...document.querySelectorAll(".cmte-num,.fn-label,.recap-tag .typed,.sec-head .typed,.hero .typed,.event-card .typed,.ticket .typed")];
+  typers.forEach(el=>{el.classList.add("typer");el.style.setProperty("--n",Math.max(8,el.textContent.trim().length));});
+
+  /* hero: plays right after the loading screen */
+  const hero=document.querySelector(".hero");
+  const heroEls=[...hero.querySelectorAll("h1,.write,.typer")];
+  if(anim){
+    heroEls.forEach(el=>el.classList.add("arm"));
+    const go=()=>heroEls.forEach(el=>el.classList.add("in"));
+    window.addEventListener("load",()=>setTimeout(go,Math.max(0,2050-(performance.now()-t0))));
+    setTimeout(go,3300);
+  }
+
+  /* count-up numbers */
+  const counts=[...document.querySelectorAll(".count")];
+  const countUp=(el,delay)=>{
+    const to=+el.dataset.to;
+    setTimeout(()=>{const t1=performance.now(),dur=1900;
+      const step=now=>{const k=Math.min(1,(now-t1)/dur),e=k===1?1:1-Math.pow(2,-10*k);el.textContent=Math.round(to*e);if(k<1)requestAnimationFrame(step)};
+      requestAnimationFrame(step);},delay);
+  };
+  const statsEl=document.getElementById("stats");
+  const armCounts=anim && below(statsEl);
+  if(armCounts) counts.forEach(c=>c.textContent="0");
+
+  /* scroll reveals: only arm what starts below the first screen, so nothing is ever stuck hidden */
+  const targets=[...document.querySelectorAll(".pop,.stagger,#stats"),...heads.filter(h=>!hero.contains(h)),...writes.filter(w=>!hero.contains(w)),...typers.filter(t=>!hero.contains(t))];
+  const isText=el=>heads.includes(el)||writes.includes(el)||typers.includes(el);
+  const reveal=el=>{
+    if(isText(el)){el.classList.add("in");const sc=el.querySelector&&el.querySelector(".script.write");if(sc)sc.classList.add("in");return;}
+    el.classList.add("seen");
+    if(el.id==="stats"){el.querySelector(".stat-board").classList.add("seen");if(armCounts) counts.forEach((c,i)=>countUp(c,250+i*140));}
+  };
+  if(anim){
+    const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){reveal(en.target);io.unobserve(en.target);}}),{rootMargin:"0px 0px -12% 0px"});
+    targets.forEach(t=>{
+      if(t.closest("#stats")&&t.id!=="stats") return;
+      if(isText(t)){ if(!below(t)) return; t.classList.add("arm"); const sc=t.querySelector&&t.querySelector(".script.write"); }
+      io.observe(t);
+    });
+    // a heading's script word is revealed with its heading
+    heads.forEach(h=>{const sc=h.querySelector(".script.write"); if(sc && !below(h) && !hero.contains(h)) sc.classList.add("in");});
+    writes.forEach(w=>{ if(!below(w)&&!hero.contains(w)) w.classList.add("in"); });
+    typers.forEach(t=>{ if(!below(t)&&!hero.contains(t)) t.classList.add("in"); });
+  } else {
+    document.querySelectorAll(".write,.typer").forEach(e=>e.classList.add("in"));
+    targets.forEach(reveal);
+  }
+
+  /* pop-up as you scroll */
+  if(anim){
+    const groups=[
+      [".st,.sticky,.div-note,.ph-card,.name-card,.soon-note,.handle,.school-chip,.folder,.fn","popin"],
+      [".feature .polaroid,.notebook,.amun .invite,.event-card,.recap-tag,.torn-note","slide-l"],
+      [".cmte-notes","slide-r"],
+      [".receipt,.side-stack","slide-r"],
+      [".sec-head p,.feature>div:last-child,.amun-copy>*,.join-box p,.sec .ctas,.hl-cols>div,.stats-cap,.cheat,.travel .folders,.nb-foot,.schools-note",'rise']
+    ];
+    const picked=new Set(); const items=[];
+    groups.forEach(([sel,kind])=>document.querySelectorAll(sel).forEach(el=>{
+      if(hero.contains(el)||picked.has(el)) return;
+      for(let a=el.parentElement;a;a=a.parentElement){ if(picked.has(a)) return; }
+      picked.add(el); items.push([el,kind]);
+    }));
+    const rvIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in-view");rvIO.unobserve(en.target);}}),{rootMargin:"0px 0px -8% 0px"});
+    const sibIndex=new Map();
+    items.forEach(([el,kind])=>{
+      if(!below(el)) return;
+      const par=el.parentElement, k=sibIndex.get(par)||0; sibIndex.set(par,k+1);
+      el.classList.add("rv",...kind.split(" "));
+      if(kind==="popin" && k%2) el.classList.add("r");
+      el.style.setProperty("--d",Math.min(k*0.11,0.6)+"s");
+      rvIO.observe(el);
+    });
+  }
+
+  /* scrimmage: polaroid stacks fan out as they scroll in */
+  document.querySelectorAll("[data-fan]").forEach(f=>{
+    if(!anim||!below(f)) return;
+    f.classList.add("stacked");
+    const fio=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){setTimeout(()=>f.classList.remove("stacked"),250);fio.disconnect();}}),{rootMargin:"0px 0px -18% 0px"});
+    fio.observe(f);
+  });
+  /* field-notes count-up */
+  const fnRow=document.querySelector(".fn-row");
+  if(fnRow){
+    const fc=[...fnRow.querySelectorAll(".count")];
+    if(anim&&below(fnRow)){
+      fc.forEach(c=>c.textContent="0");
+      const nio=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){fc.forEach((c,i)=>countUp(c,200+i*150));nio.disconnect();}}),{rootMargin:"0px 0px -12% 0px"});
+      nio.observe(fnRow);
+    }
+  }
+  /* lightbox for scrimmage + photo wall */
+  const lb=document.getElementById("lb"), lbImg=document.getElementById("lb-img");
+  const openLb=img=>{lbImg.src=img.currentSrc||img.src;lbImg.alt=img.alt;lb.hidden=false;window.__lenis&&window.__lenis.stop();document.getElementById("lb-x").focus();};
+  const closeLb=()=>{lb.hidden=true;window.__lenis&&window.__lenis.start();};
+  document.addEventListener("click",e=>{const f=e.target.closest(".fp,.frame,.ph-card");if(f){const im=f.querySelector("img");if(im)openLb(im);}});
+  lb.addEventListener("click",e=>{if(e.target!==lbImg)closeLb();});
+  addEventListener("keydown",e=>{if(e.key==="Escape"&&!lb.hidden)closeLb();});
+
+  /* safety net: reveal any text that has scrolled into view */
+  if(anim){
+    let pend=false;
+    const sweep=()=>{pend=false;const lim=innerHeight*0.9;
+      document.querySelectorAll(".arm:not(.in),.write:not(.in),.typer:not(.in)").forEach(el=>{
+        if(hero.contains(el)) return;
+        const r=el.getBoundingClientRect(); if(r.top<lim) el.classList.add("in");
+      });
+      document.querySelectorAll(".rv:not(.in-view)").forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<innerHeight*0.95) el.classList.add("in-view");});
+      document.querySelectorAll(".fan.stacked").forEach(f=>{if(f.getBoundingClientRect().top<innerHeight*0.85) f.classList.remove("stacked");});
+    };
+    addEventListener("scroll",()=>{if(!pend){pend=true;requestAnimationFrame(sweep);}},{passive:true});
+    setInterval(sweep,800);
+  }
+
+  /* gentle parallax on doodles */
+  const pars=[...document.querySelectorAll(".par")];
+  if(!reduce && pars.length){
+    let ticking=false;
+    const upd=()=>{ticking=false;const vh=innerHeight;pars.forEach(el=>{const r=el.parentElement.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)return;const c=r.top+r.height/2-vh/2;el.style.translate="0 "+(c*(+el.dataset.speed||0)).toFixed(1)+"px";});};
+    const onS=()=>{if(!ticking){ticking=true;requestAnimationFrame(upd);}};
+    addEventListener("scroll",onS,{passive:true}); upd();
+  }
 
   /* custom cursor (mouse/trackpad only) */
   if(matchMedia("(hover: hover) and (pointer: fine)").matches && !reduce){
