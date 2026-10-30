@@ -12,9 +12,6 @@ Make sure the Drive file is shared as **Anyone with the link → Viewer**, or vi
 To add a new video, copy one line and change the title, category, blurb and url.
 Categories: Basics, Parli Pro, Speaking, Writing, Crisis.
 
-## Changing the photo wall
-Find `const PHOTOS = [` in `index.html`. Each entry is a Google Drive file ID (the part after `/file/d/` in the share link) plus a caption. Photos must be shared **Anyone with the link → Viewer**. Use JPG/PNG; HEIC files don't show in browsers.
-
 ## Turning on GitHub Pages
 1. Repo **Settings → Pages**
 2. Source: **Deploy from a branch**, branch **main**, folder **/ (root)**, Save

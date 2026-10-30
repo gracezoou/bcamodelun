@@ -254,6 +254,11 @@ a.vid:hover .play{transform:scale(1.1)}
 .receipt li{font-family:var(--f-type);font-size:.84rem;line-height:1.4;margin:4px 0}
 .receipt ul{list-style:none;padding:0;margin:0}
 .receipt .cmte{font-weight:700}
+.receipt em{font-style:normal;color:var(--soft)}
+.receipt .guide{color:var(--red);font-weight:700;white-space:nowrap}
+.receipt .tbd{color:var(--soft);font-style:italic;white-space:nowrap}
+.receipt .rc-foot{font-family:var(--f-hand);font-size:1.15rem;text-align:center;margin-top:16px;color:var(--maroon)}
+.receipt .rc-foot a{color:var(--red)}
 
 /* history timeline */
 .timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;position:relative}
@@ -403,7 +408,6 @@ footer .typed{font-size:.7rem}
       <a href="#scrimmages" class="keep">Scrimmages</a>
       <a href="#travel">Travel Team</a>
       <a href="#amun">AMUN</a>
-      <a href="#photos">Photos</a>
       <a href="#join">Join</a>
     </nav>
   </div>
@@ -578,42 +582,30 @@ footer .typed{font-size:.7rem}
         </div>
       </div>
       <div class="receipt" style="margin-top:12px">
-        <div class="ttl">**Last year's lineup: AMUN XXVII**</div>
+        <div class="ttl">**AMUN XXVIII committees**</div>
         <h4>— General Assemblies —</h4>
         <ul>
-          <li><span class="cmte">DISEC</span> · weapon trafficking; foreign election interference</li>
-          <li><span class="cmte">SOCHUM</span> · prisoners' rights; population growth/decline</li>
-          <li><span class="cmte">ECOFIN</span> · privatizing public finance; ESG standards</li>
+          <li><span class="cmte">DISEC</span> · Disarmament &amp; International Security <em>(double-delegate)</em> <a class="guide" href="https://drive.google.com/file/d/1zIDA1fJ7Bs4eNyQG8XGIiBJolMF3XH2p/view" target="_blank" rel="noopener">topic guide ↗</a></li>
+          <li><span class="cmte">SOCHUM</span> · Social, Cultural &amp; Humanitarian <em>(novice + double-delegate)</em> <a class="guide" href="https://drive.google.com/file/d/1y0ht9vY3BaQC3IskHuyfZD96DAP8hSVg/view" target="_blank" rel="noopener">topic guide ↗</a></li>
+          <li><span class="cmte">ECOFIN</span> · Economic &amp; Financial Affairs <a class="guide" href="https://drive.google.com/file/d/1NVgpnQeqwH1u6a01uGoQPgb3rpZiM1a2/view" target="_blank" rel="noopener">topic guide ↗</a></li>
         </ul>
         <h4>— Regional &amp; Specialized —</h4>
         <ul>
-          <li><span class="cmte">WHO</span> · CRISPR + germline editing; informed consent</li>
-          <li><span class="cmte">CND</span> · transnational drug networks; recovery services</li>
-          <li><span class="cmte">PIF</span> · deep-sea mining; military presence in the Pacific</li>
-          <li><span class="cmte">EU</span> · expansion to the Balkans + Caucasus; espionage</li>
-          <li><span class="cmte">UNSC</span> · children in warfare, and more</li>
+          <li><span class="cmte">WHO</span> · World Health Organization <a class="guide" href="https://drive.google.com/file/d/1EPr0pvI3UHsQLXi2ru_E-7N2BvlIHKgh/view" target="_blank" rel="noopener">topic guide ↗</a></li>
+          <li><span class="cmte">CND</span> · Commission on Narcotic Drugs <a class="guide" href="https://drive.google.com/file/d/1ipfTk1OEKNvg3yFfuVZLWUtIwkTvBTu3/view" target="_blank" rel="noopener">topic guide ↗</a></li>
+          <li><span class="cmte">AU</span> · African Union <a class="guide" href="https://drive.google.com/file/d/1tQFx-vRYLoKTD2NTst-1LeobIe_O0qqY/view" target="_blank" rel="noopener">topic guide ↗</a></li>
+          <li><span class="cmte">EU</span> · European Union <span class="tbd">guide coming soon</span></li>
+          <li><span class="cmte">UNSC</span> · Security Council <a class="guide" href="https://drive.google.com/file/d/1jYwoQjKSQsa4X4VHy9_MHtKBmYl2LcPw/view" target="_blank" rel="noopener">topic guide ↗</a></li>
         </ul>
         <h4>— Crisis —</h4>
         <ul>
-          <li><span class="cmte">SPEC</span> · The Expanse (a solar system on the brink)</li>
-          <li><span class="cmte">CRISIS</span> · Tim Donaghy and the NBA betting scandal</li>
-          <li><span class="cmte">JCC</span> · Formula 1 SpyGate</li>
-          <li><span class="cmte">AD-HOC</span> · post-WW3 underground bunker games</li>
+          <li><span class="cmte">SPEC</span> · Specialized <em>(crisis w/o backroom)</em> <a class="guide" href="https://drive.google.com/file/d/1kfvFG5vo3V86VngAFRPV0LnsbTUPzGZl/view" target="_blank" rel="noopener">topic guide ↗</a></li>
+          <li><span class="cmte">CRISIS</span> · Crisis <a class="guide" href="https://drive.google.com/file/d/1b4XuF6XRiNRd-GhiM1KKUHJz_Kd-qNOz/view" target="_blank" rel="noopener">topic guide ↗</a></li>
+          <li><span class="cmte">JCC</span> · Joint Crisis Committee, A + B <span class="tbd">guides coming soon</span></li>
+          <li><span class="cmte">AD-HOC</span> · Ad-Hoc of the Secretariat <em>(for advanced/adventurous dels)</em> <span class="tbd">topic TBD…</span></li>
         </ul>
+        <p class="rc-foot">full details at <a href="https://www.academymodelun.org/amun-committees.html" target="_blank" rel="noopener">academymodelun.org</a></p>
       </div>
-    </div>
-  </section>
-
-  <!-- PHOTOS -->
-  <section id="photos" class="sec">
-    <div class="wrap">
-      <div class="sec-head pop">
-        <span class="typed">The scrapbook</span>
-        <h2 class="cond">AMUN XXVII <span class="script">in photos</span></h2>
-        <p>450+ delegates, 28 schools and two very full days at BCA last February.</p>
-      </div>
-      <div class="wall" id="wall"></div>
-      <div class="ctas" style="margin-top:56px"><a class="btn maroon" href="https://www.instagram.com/bcamodelun/" target="_blank" rel="noopener">More on @bcamodelun</a></div>
     </div>
   </section>
 
@@ -768,26 +760,6 @@ document.getElementById("player-close").addEventListener("click",closePlayer);
 modal.addEventListener("click",e=>{if(e.target===modal)closePlayer()});
 addEventListener("keydown",e=>{if(e.key==="Escape"&&!modal.hidden)closePlayer()});
 
-/* ===== PHOTO WALL =====
-   Each photo is a Google Drive file ID (the part after /file/d/ in its link).
-   Files must be shared "Anyone with the link can view". Swap IDs to change photos. */
-const PHOTOS = [
-  { id:"1ZSq2gdXrxUAO5mWrbVSlpVRTf3JGb7kd", caption:"amun xxvii" },
-  { id:"1hvcDJdl3wrc0zGMUb2seyiiEpdiHBn5p", caption:"committee in session" },
-  { id:"1h2bx_FKkpPrkqq0_p-Lcf_kNwuwym4q2", caption:"feb 5–6, 2026" },
-  { id:"1R_Xz0iuR5z5atXAN9aPiM6A2kY0VLT9k", caption:"the amun crew" },
-  { id:"1UGzvGOgFIrljdV_3Yfs330RpicdHXtEV", caption:"gavels up!" },
-  { id:"1hyGlCRbD_g_X32Vo0xxt1T_AatTgG8kn", caption:"see you at xxviii" }
-];
-const wall=document.getElementById("wall");
-wall.innerHTML = PHOTOS.map((p,i)=>`<figure class="polaroid"><span class="clip" aria-hidden="true"></span><div class="ph"><img loading="lazy" alt="BCA Model UN at AMUN XXVII" data-i="${i}" src="https://lh3.googleusercontent.com/d/${esc(p.id)}=w1000"></div><figcaption>${esc(p.caption)}</figcaption></figure>`).join("");
-wall.querySelectorAll("img").forEach(img=>{
-  img.addEventListener("error",()=>{
-    const p=PHOTOS[img.dataset.i];
-    if(!img.dataset.tried){img.dataset.tried="1";img.src=`https://drive.google.com/thumbnail?id=${p.id}&sz=w1000`;}
-    else{img.replaceWith(Object.assign(document.createElement("span"),{className:"none",textContent:"photo coming soon"}));}
-  });
-});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
