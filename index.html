@@ -355,14 +355,17 @@ a.vid:hover .play{transform:scale(1.1)}
 .recap-title em{font-style:normal;font-family:var(--f-script);font-weight:400;color:var(--red);font-size:1.15em;letter-spacing:0}
 .recap-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--f-hand);font-size:1.2rem;color:var(--soft)}
 .recap-meta b{font-family:var(--f-type);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-right:6px}
-.pstamps{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pstamps-lbl{font-family:var(--f-hand);font-size:1.1rem;color:var(--soft);width:100%}
-.pstamp{display:grid;justify-items:center;gap:6px;width:118px;padding:12px 8px 10px;text-align:center;text-decoration:none;color:var(--maroon);background:#FFF6C9;border:2px dashed rgba(99,26,45,.35);font-family:var(--f-hand);font-size:.98rem;line-height:1.1;transition:transform .2s}
-.pstamp.p1{transform:rotate(-3deg)}
-.pstamp.p2{background:#DCE8F7;transform:rotate(2.5deg)}
-.pstamp img{width:54px;height:54px;object-fit:contain}
-.pstamp:hover,.pstamp:focus-visible{transform:rotate(0) translateY(-3px) scale(1.04)}
-.pstamp:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.partner-notes{flex:0 0 auto;display:flex;gap:22px;padding:14px 4px 12px}
+.pnote{position:relative;width:150px;min-height:170px;padding:22px 14px 14px;display:grid;justify-items:center;align-content:start;gap:8px;text-align:center;text-decoration:none;color:var(--maroon);box-shadow:0 14px 20px -12px rgba(42,14,21,.5);transition:transform .2s,box-shadow .2s}
+.pnote::before{content:"";position:absolute;top:-8px;left:50%;width:16px;height:16px;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle at 35% 35%,#F06A6F,#B3202B 70%);box-shadow:0 3px 4px rgba(0,0,0,.3)}
+.pn-1{background:#FFF6C9;transform:rotate(-4deg)}
+.pn-2{background:#DCE8F7;transform:rotate(3.5deg);margin-top:26px}
+.pnote img{width:84px;height:84px;object-fit:contain}
+.pn-name{font-family:var(--f-hand);font-size:1.15rem;line-height:1.1}
+.pn-go{font-family:var(--f-type);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.pnote:hover,.pnote:focus-visible{transform:rotate(0) translateY(-4px) scale(1.04);box-shadow:0 20px 26px -14px rgba(42,14,21,.55)}
+.pnote:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+@media (max-width:560px){.partner-notes{width:100%;justify-content:center}}
 
 .field-notes{margin:clamp(22px,3vw,30px) 0 0}
 .fn-label{color:var(--soft);margin-bottom:10px}
@@ -725,15 +728,16 @@ footer .typed{font-size:.7rem}
               <span><b>where</b> BCA</span>
             </div>
           </div>
-          <div class="pstamps" aria-label="Partner schools">
-            <span class="pstamps-lbl">scrimmaged with</span>
-            <a class="pstamp p1" href="https://nvotmun.vercel.app/" target="_blank" rel="noopener" aria-label="Northern Valley Old Tappan Model UN website (opens in a new tab)">
-              <img loading="lazy" src="assets/logo-nvot.png" alt="" width="54" height="54">
-              <span>Northern Valley Old Tappan</span>
+          <div class="partner-notes" aria-label="Partner schools">
+            <a class="pnote pn-1" href="https://nvotmun.vercel.app/" target="_blank" rel="noopener" aria-label="Northern Valley Old Tappan Model UN website (opens in a new tab)">
+              <img loading="lazy" src="assets/logo-nvot.png" alt="" width="84" height="84">
+              <span class="pn-name">Northern Valley<br>Old Tappan</span>
+              <span class="pn-go">visit their MUN &rarr;</span>
             </a>
-            <a class="pstamp p2" href="https://clubs.d-e.org/demun/" target="_blank" rel="noopener" aria-label="Dwight-Englewood Model UN website (opens in a new tab)">
-              <img loading="lazy" src="assets/logo-dwight-englewood.png" alt="" width="54" height="54">
-              <span>Dwight-Englewood</span>
+            <a class="pnote pn-2" href="https://clubs.d-e.org/demun/" target="_blank" rel="noopener" aria-label="Dwight-Englewood Model UN website (opens in a new tab)">
+              <img loading="lazy" src="assets/logo-dwight-englewood.png" alt="" width="84" height="84">
+              <span class="pn-name">Dwight-<br>Englewood</span>
+              <span class="pn-go">visit their MUN &rarr;</span>
             </a>
           </div>
         </header>
